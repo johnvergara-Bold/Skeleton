@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guía de Skeleton views | Super App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>/* ---------- Pantalla (réplica del Figma) ---------- */
+.scr{--navy:#121E6C;--ink:#1E1E1E;--grey:#606060;--pink:#FF2947;--pinkbg:#FFF2F4;--sk:#F3F4FB;--card:#F7F8FB;--green:#04B255;--red:#C31A2F;
+  position:relative;width:393px;background:#fff;overflow:hidden;color:var(--ink);text-align:left;font-family:Montserrat,'Segoe UI',system-ui,sans-serif}
+.scr *{box-sizing:border-box;margin:0}
+.scr svg{display:block;flex:none}
+.scr button{font-family:inherit}
+.fx{position:absolute;left:0;top:0;width:393px;height:300px;overflow:hidden;pointer-events:none}
+.stat{position:absolute;left:0;top:.5px;width:393px;height:66px}
+.hh{position:absolute;left:0;right:0;top:73.6px;height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between}
+.who{display:flex;gap:4px;align-items:flex-start}
+.nm{padding:0 4px;display:flex;flex-direction:column;justify-content:center}
+.nm b{font-weight:500;font-size:20px;line-height:28px;color:#fff;text-shadow:0 12px 28px rgba(18,30,108,.08)}
+.nm span{font-weight:500;font-size:14px;line-height:20px;color:#fff}
+.chv{height:28px;display:grid;place-items:center}
+.hb{display:flex;gap:8px}
+.hbtn{width:44px;height:36px;border-radius:100px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.28);display:grid;place-items:center;box-shadow:0 4px 16px rgba(18,30,108,.08);backdrop-filter:blur(8px)}
+.body{padding:170.5px 16px 0;display:flex;flex-direction:column;gap:40px}
+.tabs{display:flex;gap:8px;height:36px}
+.tab{height:36px;padding:0 16px;border-radius:100px;display:flex;align-items:center;font-size:14px;line-height:20px;color:var(--navy);font-weight:400;border:1px solid transparent}
+.tab.on{font-weight:600;padding:0 15px;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(to left,#ff2947 19%,#121e6c 72%,#0407f5 100%) border-box;box-shadow:inset 1px 1px 12px rgba(4,7,245,.28)}
+.tab.last{padding:0 8px}
+.mod[data-m=mov]{display:flex;flex-direction:column;gap:8px}
+.mod[data-m=prod]{display:flex;flex-direction:column;gap:16px;position:relative}
+.mod[data-m=prod]::before{content:"";position:absolute;left:-16px;right:-16px;top:-20px;bottom:-20px;background:linear-gradient(#F7F8FB,#fff);z-index:0}
+.mod[data-m=prod][data-state=skeleton]::before{bottom:10px}
+.mod[data-m=prod]>*{position:relative;z-index:1}
+.mod[data-m=carr][data-state=skeleton]{display:none}
+.mod.swap{animation:fade .2s ease}
+.mod:focus{outline:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.dash{display:flex;flex-direction:column;gap:12px}
+.search{height:44px;display:flex;justify-content:space-between;align-items:center}
+.pill{height:44px;width:127px;border-radius:100px;background:var(--sk);padding:0 16px;display:flex;align-items:center;gap:8px;font-weight:500;font-size:16px;line-height:20px;letter-spacing:-.01em;color:var(--navy)}
+.addbtn{width:44px;height:44px;border-radius:32px;background:var(--pinkbg);display:grid;place-items:center}
+.dtext{padding:12px 0;display:flex;flex-direction:column;gap:2px}
+.dtext.skt{gap:8px}
+.lbl{font-weight:400;font-size:14px;line-height:20px;color:var(--grey)}
+.bal{display:flex;align-items:center;gap:2px;height:52px}
+.bal b{flex:1;font-weight:300;font-size:48px;line-height:52px;color:var(--ink);white-space:nowrap}
+.bal2{display:flex;align-items:center;gap:16px}
+.carr{height:68px;border-radius:20px;display:flex;align-items:center;gap:8px;padding:8px 0}
+.cic{position:relative;width:52px;height:52px;border-radius:16px;background:var(--card);display:grid;place-items:center;flex:none}
+.dot{position:absolute;left:44px;top:-.5px;width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.cinfo{display:flex;flex-direction:column;gap:4px;min-width:0}
+.t16{font-weight:500;font-size:16px;line-height:20px;color:var(--ink)}
+.acts{display:flex;gap:8px}
+.act{width:84.4px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px}
+.act .box{width:100%;height:68px;border-radius:16px;background:var(--sk);display:grid;place-items:center}
+.act span{font-size:12px;line-height:16px;text-align:center;color:var(--ink)}
+.acts.l .act{height:108px}
+.breb{background:var(--card);border-radius:20px;padding:12px;display:flex;flex-direction:column;gap:12px;height:140px}
+.breb.skb{height:120px;padding:48px 12px 0}
+.bh{height:36px;display:flex;align-items:center;justify-content:space-between}
+.bid{display:flex;align-items:center;gap:4px;font-weight:500;font-size:16px;line-height:20px;color:var(--ink)}
+.brow{display:flex;gap:8px}
+.bt{width:107px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.bt .box{width:100%;height:44px;border-radius:16px;background:#fff;display:grid;place-items:center}
+.bt span{font-size:12px;line-height:16px;color:var(--ink)}
+.sh{height:40px;padding:8px 0;display:flex;align-items:center;justify-content:space-between}
+.sh h3{font-weight:500;font-size:20px;line-height:20px;letter-spacing:-.01em;color:var(--navy)}
+.more{all:unset;cursor:pointer;font-weight:600;font-size:12px;line-height:16px;color:var(--navy);text-decoration:underline}
+.more:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.hlist{display:flex;flex-direction:column;gap:8px}
+.hc{height:68px;background:#fff;border-radius:16px;display:flex;align-items:center;gap:12px;padding:12px 0}
+.hi{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.hr{display:flex;gap:12px}
+.hr2{display:flex;justify-content:space-between;font-weight:500;font-size:16px;line-height:20px}
+.hr2 b{font-weight:500}
+.neg{color:var(--red)}
+.plist{display:flex;flex-direction:column;gap:16px}
+.prow{height:52px;padding:4px 0;border-radius:20px;display:flex;align-items:center;gap:16px;color:var(--ink)}
+.prow.skr{height:68px;padding:12px 0;gap:12px}
+.ptx{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.ptx b{font-weight:500;font-size:16px;line-height:20px}
+.abtn{height:36px;min-width:88px;padding:0 16px;border:0;border-radius:35px;background:var(--pinkbg);color:var(--pink);font-weight:600;font-size:14px;line-height:20px;cursor:pointer;display:grid;place-items:center}
+.abtn:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.errwrap{position:relative}
+.errwrap>.hlist,.errwrap>.plist{pointer-events:none;user-select:none}
+.err{position:absolute;left:-16px;top:-1.5px;width:393px;z-index:2;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(3.6px);backdrop-filter:blur(3.6px);border-radius:20px;padding:16px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;overflow:hidden}
+.eb{width:48px;height:48px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.et{font-weight:500;font-size:16px;line-height:20px;color:var(--ink)}
+.sk{display:block;flex:none;background:linear-gradient(100deg,#F3F4FB 0%,#F3F4FB 35%,#FBFBFE 50%,#F3F4FB 65%,#F3F4FB 100%) fixed;background-size:800px 100%;animation:shim 1.5s linear infinite}
+.skw{display:block;flex:none;background:#fff}
+@keyframes shim{from{background-position:-800px 0}to{background-position:0 0}}
+.nav{position:absolute;left:0;bottom:0;width:393px;height:110px;padding:24px 20px;background:rgba(255,255,255,.01);backdrop-filter:blur(16px);z-index:5}
+.nbar{width:353px;height:62px;border-radius:40px;padding:8px 16px;display:flex;gap:12px;align-items:center;border:1px solid transparent;
+  background:linear-gradient(rgba(247,248,251,.2),rgba(247,248,251,.2)) padding-box,radial-gradient(circle at 50% 50%,rgba(255,255,255,.03) 44%,rgba(8,14,255,.10) 100%) padding-box,linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)) padding-box,linear-gradient(90deg,rgba(210,212,225,.5),rgba(210,212,225,0) 52%,rgba(210,212,225,.5)) border-box;
+  box-shadow:inset 0 3px 7.5px rgba(18,30,108,.13),inset 0 -2px 4px #fff,0 10px 18.7px rgba(18,30,108,.09);backdrop-filter:blur(12px)}
+.ni{width:71.3px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;line-height:14px;color:var(--navy);font-weight:400}
+.ni.on{font-weight:600}
+
+/* ---------- Simulador ---------- */
+.lab{display:grid;grid-template-columns:393px minmax(300px,520px);gap:48px;align-items:start;justify-content:center}
+.phone{position:sticky;top:24px;width:393px;height:min(852px,calc(100vh - 48px));min-height:560px;border-radius:36px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.scroller{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;overscroll-behavior-y:contain}
+.scroller::-webkit-scrollbar{display:none}
+.ptr{position:absolute;left:50%;top:58px;width:40px;height:40px;margin-left:-20px;border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(18,30,108,.22);display:grid;place-items:center;z-index:7;opacity:0;transform:translateY(-30px);transition:opacity .2s,transform .2s;pointer-events:none}
+.ptr.on,.ptr.pull{opacity:1}
+.ptr.on{transform:translateY(40px)}
+.spin{width:20px;height:20px;border-radius:50%;border:3px solid #F3F4FB;border-top-color:#FF2947}
+.ptr.on .spin{animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.snack{position:absolute;left:16px;right:16px;bottom:128px;background:#121E6C;color:#fff;border-radius:14px;padding:12px 16px;font-size:14px;line-height:20px;z-index:8;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s;font-family:Montserrat,system-ui,sans-serif}
+.snack.on{opacity:1;transform:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:22px}
+.panel h3{margin:0 0 8px;font-weight:600;font-size:14px;color:var(--brand)}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:10px 16px;border-radius:999px;font:600 14px Montserrat,system-ui,sans-serif;cursor:pointer}
+.btn.pri{background:#FF2947;color:#fff;border-color:transparent}
+.btn:hover{filter:brightness(.96)}
+.opt{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin:6px 0;cursor:pointer}
+.opt input{margin-top:3px;accent-color:#FF2947}
+.opt small{display:block;color:var(--muted);font-size:12px}
+.hint{font-size:12px;color:var(--muted);margin:0}
+.insp{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.insp li{display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:10px;font-size:13px;padding:8px 12px;border-radius:12px;background:var(--bg)}
+.insp i{width:10px;height:10px;border-radius:50%;background:#9AA0C2}
+.insp li.loaded i{background:var(--ok)}
+.insp li.error i{background:var(--bad)}
+.insp em{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.log{list-style:none;margin:0;padding:0;max-height:190px;overflow:auto;font-size:13px;display:grid;gap:6px}
+.log li{display:grid;grid-template-columns:48px 1fr;gap:8px}
+.log time{color:var(--muted);font-variant-numeric:tabular-nums}
+.log li.warn{color:var(--bad)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 24px}
+.rule h3{margin:0 0 6px;font-weight:600;font-size:15px;color:var(--brand)}
+.rule p{margin:0;font-size:14px;color:var(--text)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:960px){.lab{grid-template-columns:1fr;justify-items:center}.phone{position:relative;top:0}.panel{width:100%;max-width:520px}}
+@media (prefers-reduced-motion:reduce){.sk{animation:none;background:#F3F4FB}.mod.swap{animation:none}.ptr.on .spin{animation-duration:2s}html{scroll-behavior:auto}}
+
+:root{color-scheme:light;
+  --bg:#FFFFFF;--surface:#FFFFFF;--panel:#F7F8FB;--text:#1E1E1E;--muted:#3E4983;--line:#D2D4E1;--brand:#121E6C;
+  --accent:#FF2947;--accent-soft:#FFF2F4;--chip:#EEF0FA;--ok:#1B8959;--ok-bg:#F4FDF9;--info:#0A53A5;--info-bg:#F1F9FF;--bad:#EE424E;--bad-bg:#FFF2F4;
+  --shadow:0 24px 60px rgba(18,30,108,.14)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Montserrat,'Segoe UI',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.45}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4,p{margin:0}
+.top{position:sticky;top:0;z-index:50;height:64px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:28px;padding:0 24px}
+.brand{font-weight:800;font-size:18px;color:var(--brand);white-space:nowrap}
+.areas{display:flex;gap:4px;flex-wrap:wrap}
+.areas a{padding:8px 16px;border-radius:100px;font-weight:600;font-size:14px;color:var(--brand)}
+.areas a.on{background:var(--chip)}
+.ver{margin-left:auto}
+.shell{display:grid;grid-template-columns:272px 1fr;min-height:calc(100vh - 64px)}
+.side{position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;padding:24px 0 24px 24px}.sidecard{background:var(--panel);border-radius:21px;padding:16px 12px}.shell.nosb{grid-template-columns:1fr}.shell.nosb .side{display:none}
+.side h4{font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 14px 10px}
+.side a{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:100px;font-weight:500;font-size:14px;color:var(--brand);border:1px solid transparent}
+.side a.on{background:var(--surface);border-color:var(--line);font-weight:700}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none}
+.sdot.ok{background:var(--ok)}.sdot.info{background:var(--info)}.sdot.bad{background:var(--bad)}
+main{padding:32px 40px 96px;min-width:0}
+.crumb{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:12px}
+.crumb a{color:var(--brand)}
+.banner{border-radius:21px;padding:28px 32px;color:#fff;background:linear-gradient(90deg,#121E6C 20%,#3E2566 80%)}
+.banner h1{font-weight:900;font-size:36px;line-height:1.1}
+.banner p{margin-top:8px;font-size:16px;max-width:60ch;opacity:.92}
+.banner .tag{margin-top:14px}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-weight:700;font-size:12px;white-space:nowrap}
+.tag.ok{background:var(--ok-bg);color:var(--ok)}.tag.info{background:var(--info-bg);color:var(--info)}.tag.bad{background:var(--bad-bg);color:var(--bad)}.tag.neutral{background:var(--chip);color:var(--brand)}
+.pnl{background:var(--panel);border-radius:21px;padding:28px;margin-top:20px}
+.pnl h2{font-weight:800;font-size:22px;color:var(--brand);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:var(--surface);border-radius:20px;padding:18px;display:block;border:1px solid transparent}
+a.card:hover{border-color:var(--line)}
+.card h3{font-weight:800;font-size:17px;color:var(--text);margin:2px 0 8px}
+.card p{font-size:14px;color:var(--muted)}
+.th{height:112px;border-radius:14px;background:var(--panel);display:grid;place-items:center;margin-bottom:14px}
+.cf{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px}
+.sbar{display:flex;height:8px;border-radius:100px;overflow:hidden;background:var(--line);margin-top:12px}
+.sbar i{display:block}.sbar .ok{background:var(--ok)}.sbar .info{background:var(--info)}.sbar .bad{background:var(--bad)}
+.ptabs{display:flex;gap:8px;margin:24px 0 0;border-bottom:1px solid var(--line)}
+.ptabs button{all:unset;cursor:pointer;padding:10px 18px;font-weight:600;font-size:14px;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px}
+.ptabs button[aria-selected=true]{color:var(--brand);font-weight:800;border-color:var(--brand)}
+.ptabs button:focus-visible{outline:3px solid var(--accent)}
+.use{display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.pv{position:relative;width:393px;height:760px;overflow-y:auto;overflow-x:hidden;border-radius:28px;box-shadow:var(--shadow);background:#fff;scrollbar-width:none;flex:none}
+.pv::-webkit-scrollbar{display:none}
+.pin{position:absolute;left:6px;z-index:9;width:24px;height:24px;border-radius:50%;background:#121E6C;color:#fff;font:700 12px/24px Montserrat,sans-serif;text-align:center;box-shadow:0 0 0 3px #fff}
+.legend{flex:1;min-width:260px}
+.legend h3{font-weight:800;font-size:18px;color:var(--brand);margin-bottom:14px}
+.legend ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.legend li{display:flex;gap:12px;align-items:center;background:var(--surface);border-radius:100px;padding:8px 16px 8px 8px;font-weight:600;font-size:14px}
+.pn{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#121E6C;color:#fff;font:700 12px/24px Montserrat,sans-serif;text-align:center;flex:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.spec{background:var(--surface);border-radius:20px;padding:20px}
+.spec b{display:block;font-weight:800;font-size:28px;color:var(--brand);line-height:1.1}
+.spec span{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.ctx{font-size:17px;font-weight:600;color:var(--brand);max-width:62ch;line-height:1.5}.spec b.ok{color:var(--ok)}.spec b.info{color:var(--info)}.spec b.bad{color:var(--bad)}.cta{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:13px 26px;border-radius:100px;background:#121E6C;color:#fff;font-weight:700;font-size:15px}.cta:hover{background:#3E4983}
+.flow{display:flex;gap:14px;align-items:flex-start;overflow-x:auto;padding-bottom:6px}
+.stage{min-width:240px;max-width:280px;display:flex;flex-direction:column;gap:12px;flex:none}
+.sh2{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;color:var(--brand)}
+.svc{background:var(--surface);border-radius:20px;padding:16px}
+.svc h3{font-weight:800;font-size:16px}
+.svc .fl{font-size:13px;color:var(--muted);margin-top:10px}
+.svc.empty{border:2px dashed var(--line);background:transparent;color:var(--muted);font-weight:600;font-size:14px;text-align:center;padding:28px 12px}
+.fa{align-self:center;font-weight:800;color:var(--muted);font-size:22px;flex:none}
+.ofree{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;font-weight:600;color:var(--muted)}
+.oblk{margin-bottom:22px}.oblk h3{font-weight:800;font-size:18px;color:var(--brand);margin-bottom:12px}
+.scr.crit{height:852px;padding:0}
+.crit .cmid{position:absolute;left:0;right:0;top:402px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cbtn{all:unset;cursor:pointer;width:44px;height:44px;border-radius:32px;background:var(--pinkbg);display:grid;place-items:center}
+.cbtn:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.cmsg{font-size:14px;line-height:20px;text-align:center;color:var(--ink)}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.seg button{all:unset;cursor:pointer;padding:9px 16px;border-radius:100px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:14px;color:var(--brand)}
+.seg button[aria-pressed=true]{background:#121E6C;color:#fff;border-color:#121E6C}
+.seg button:focus-visible{outline:3px solid var(--accent)}
+.lnk{font-family:inherit;cursor:pointer}
+.pn.lg{width:34px;height:34px;font-size:15px;line-height:34px}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.pc{background:var(--surface);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.pc .ph{display:flex;align-items:center;gap:12px}
+.pc h3{font-weight:800;font-size:17px;margin:0;line-height:1.25}
+.pc p{font-size:14px;line-height:1.6}
+.pc .ex{background:var(--panel);border-radius:14px;padding:12px 14px;font-size:13px;line-height:1.5;color:var(--muted)}
+.pc .ex b{color:var(--brand)}
+.errflat{height:108px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.breb.onerr{padding:16px;justify-content:center}.breb.onerr .errflat{height:auto;padding:0}
+.crit .cmsg{max-width:270px}
+.cbtn.ld svg{animation:rot .9s linear infinite}
+.cbtn.shake{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.cbtn.ld svg{animation-duration:3s}.cbtn.shake{animation:none}}
+.pinbox{position:absolute;z-index:9;border:2px dashed #121E6C;border-radius:14px;pointer-events:none;transition:box-shadow .15s,background .15s}
+.pinbox.hl{border-style:solid;background:rgba(18,30,108,.06);box-shadow:0 0 0 4px rgba(18,30,108,.15)}
+.legend li{cursor:default}.legend li:focus-visible{outline:3px solid var(--accent)}
+.spec span{font-weight:700;color:var(--text)}
+.spec p{margin-top:8px;font-size:13px;line-height:1.5;color:var(--muted)}
+.ljw{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}
+.ljc{background:var(--surface);border-radius:20px;padding:22px}
+.ljc p{font-size:14px;line-height:1.55;margin-top:6px}
+.ljp{display:flex;gap:14px;align-items:center;justify-content:center;margin:18px 0 8px}
+.ljl{font-size:12px;font-weight:700;color:var(--muted);text-align:center;margin-bottom:8px}
+.mp{position:relative;width:130px;height:230px;border-radius:16px;background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.mp i{position:absolute;left:12px;right:12px;border-radius:8px;display:block;font-style:normal}
+.mp .t{top:12px;height:12px;right:auto;width:60px;background:#B9BFDC}
+.mp .sk{background:#E3E6F3}.mp .ct{background:#B9C2EA}
+.mp .bt{height:28px;border-radius:14px;background:#FFF2F4;border:1.5px solid #FF2947}
+.mp .gd{left:0;right:0;height:0;border-radius:0;border-top:2px dashed #121E6C}
+.mp .dl{left:auto;right:8px;font:700 10px/14px Montserrat,sans-serif;color:#EE424E;background:#fff;padding:0 5px;border-radius:6px}
+.kick{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-bottom:8px}
+.sec{margin-top:64px;scroll-margin-top:84px}
+.sec+.sec{border-top:1px solid var(--line);padding-top:56px}
+.sech{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sech h2{font-weight:900;font-size:30px;line-height:1.15;color:var(--brand)}
+.ssum{margin:8px 0 4px;font-size:16px;color:var(--muted)}
+.areas a{display:inline-flex;align-items:center}
+.sn{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--chip);color:var(--brand);font-size:12px;font-weight:700;margin-right:8px}
+.areas a.on .sn{background:#121E6C;color:#fff}
+.foot{margin-top:14px;font-size:12px;color:var(--muted)}
+.list{display:grid;gap:10px}
+.item{display:flex;gap:12px;align-items:center;background:var(--surface);border-radius:16px;padding:12px 16px;font-size:14px;font-weight:500}
+.item .tag{flex:none;min-width:92px;justify-content:center}
+.item small{margin-left:auto;color:var(--muted);font-size:12px;font-weight:600;white-space:nowrap}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.lnk{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:100px;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--brand)}
+.note{display:flex;gap:12px;align-items:center;border-radius:16px;background:var(--accent-soft);padding:14px 18px;font-weight:600;font-size:14px;margin-top:20px}
+.note b{color:var(--accent)}
+.tl{position:relative;height:150px;margin:56px 24px 0}
+.tl .bar{position:absolute;left:0;right:0;top:62px;height:14px;border-radius:100px;background:linear-gradient(90deg,#1B8959,#0A53A5 55%,#EE424E)}
+.tl .mk{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:130px}
+.tl .mk b{display:block;font-weight:800;font-size:20px;color:var(--brand)}
+.tl .mk span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.tl .mk i{position:absolute;left:50%;top:50px;width:2px;height:38px;background:var(--brand);transform:translateX(-50%)}
+.tl .mk.low{top:98px}.tl .mk.low i{top:-34px;height:30px}
+.tl .mk.low b{font-size:15px}
+.bars{display:grid;gap:14px}
+.br{display:grid;grid-template-columns:150px 1fr auto;gap:16px;align-items:center}
+.br strong{font-weight:700;font-size:14px}
+.bb{height:12px;border-radius:100px;margin:4px 0;min-width:4px}
+.bb.s{background:var(--line)}.bb.c{background:var(--brand)}
+.bv{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--muted);font-weight:600}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.demo{display:flex;gap:28px;flex-wrap:wrap}
+.dm{background:var(--surface);border-radius:20px;padding:20px;width:260px}
+.dm h3{font-weight:800;font-size:16px;color:var(--brand);margin-bottom:14px}
+.dbar{height:16px;border-radius:16px;background:#E3E6F3;margin:10px 0}
+.d-pulse{animation:pls 1.4s ease-in-out infinite}
+@keyframes pls{50%{opacity:.4}}
+.d-sweep{background:linear-gradient(100deg,#E3E6F3 30%,#F7F8FB 50%,#E3E6F3 70%);background-size:300% 100%;animation:swp 1.5s linear infinite}
+@keyframes swp{from{background-position:100% 0}to{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.d-pulse,.d-sweep{animation:none}}
+.bbtn{all:unset;cursor:pointer;display:inline-grid;place-items:center;min-width:140px;height:44px;padding:0 24px;border-radius:100px;background:#FF2947;color:#fff;font-weight:700;font-size:15px}
+.bbtn[aria-busy=true]{opacity:.75;cursor:not-allowed}
+.dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#fff;margin:0 3px;animation:dt 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dt{50%{transform:translateY(-4px);opacity:.5}}
+.stub{border:2px dashed var(--line);border-radius:21px;min-height:240px;display:grid;place-items:center;color:var(--muted);font-weight:600;margin-top:20px}
+.hero{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.mini{width:118px;height:330px;overflow:hidden;border-radius:16px;box-shadow:var(--shadow);background:#fff;flex:none}
+.mini>div{transform:scale(.3);transform-origin:0 0;width:393px}
+.step{display:grid;gap:10px;justify-items:center;font-weight:700;font-size:13px;color:var(--brand)}
+.arrow{align-self:center;font-weight:800;color:var(--muted);font-size:22px}
+@media (max-width:1000px){.shell{grid-template-columns:1fr}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:24px 18px 72px}.br{grid-template-columns:1fr}}
+
+/* Tipografía sobria: pesos como en las pantallas (Medium 500 y SemiBold 600) */
+.brand{font-weight:600}
+.banner h1{font-weight:500}
+.kick{font-weight:600}
+.sech h2,.pnl h2{font-weight:500}
+.card h3,.pc h3,.svc h3,.dm h3,.oblk h3,.legend h3,.ljc h3{font-weight:500}
+.side h4{font-weight:600}
+.side a.on{font-weight:600}
+.ptabs button[aria-selected=true]{font-weight:600}
+.spec b{font-weight:500}
+.spec span{font-weight:600}
+.tag{font-weight:600}
+.cta,.lnk{font-weight:600}
+.sn,.pn{font-weight:600}
+.tl .mk b{font-weight:500}
+.legend li{font-weight:500}
+.sh2{font-weight:600}
+.bbtn{font-weight:600}
+/* Orden de capas de la pantalla: degradado detrás, contenido encima, cabecera arriba */
+.scr .fx{z-index:0}
+.scr .body{position:relative;z-index:1}
+.scr .stat,.scr .hh{z-index:2}
+.tab.on{box-sizing:border-box;width:101px;height:36px;padding:0;border:0;border-radius:0;background:url(data:image/png;base64,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) center/100% 100% no-repeat;box-shadow:none;font-weight:600}
+.tab.on .ti{display:flex;align-items:center;justify-content:center;width:100%;height:36px;padding:0;border-radius:0;background:none;box-shadow:none}
+.rfs{position:absolute;left:50%;top:175px;margin-left:-22px;width:44px;height:44px;opacity:0;z-index:6;pointer-events:none;transform:translateY(-219px);will-change:transform,opacity}
+.rfs svg{display:block;will-change:transform}
+.dm.wide{width:auto;flex:1 1 320px;max-width:460px}
+.dbar{background:#F3F4FB}
+.d-sweep{background:linear-gradient(100deg,#F3F4FB 30%,#FBFBFE 50%,#F3F4FB 70%);background-size:300% 100%;animation:swp 1.5s linear infinite}
+@keyframes pls{50%{opacity:.55}}
+.anr{margin:18px 0 4px;border-top:1px solid var(--line)}
+.ar{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.5}
+.ar>span{font-weight:600;color:var(--brand)}
+.ar code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--muted)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:5px;vertical-align:-2px;margin-right:8px;box-shadow:inset 0 0 0 1px var(--line)}
+.tw{overflow-x:auto;border-radius:16px;background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;line-height:1.45;min-width:1120px}
+.tbl th{text-align:left;font-weight:600;color:var(--brand);padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .tg td{background:var(--panel);font-weight:600;color:var(--brand)}
+.tbl .te{color:var(--muted);font-style:italic}
+.ckgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;align-items:start}
+.ckg{background:var(--surface);border-radius:20px;padding:20px 22px 8px}
+.gh2{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.ckg h3{font-weight:500;font-size:17px;color:var(--brand);margin:0}
+.ck{display:flex;gap:14px;align-items:flex-start;padding:14px 0;margin:0;border-top:1px solid var(--line);cursor:pointer}
+.gh2+.ck{border-top:0}
+.ck input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:1px 0 0;border-radius:7px;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s}
+.ck input:checked{background:#121E6C;border-color:#121E6C}
+.ck input:checked::after{content:'✓';color:#fff;font-size:13px;line-height:1;font-weight:700}
+.ck input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ck b{display:block;font-weight:500;font-size:15px;line-height:1.35}
+.ck small{display:block;margin-top:3px;font-size:13px;line-height:1.5;color:var(--muted)}
+.ck input:checked ~ div{opacity:.55}
+.pbar{height:8px;border-radius:100px;background:var(--line);overflow:hidden;margin:0 0 20px}
+.pfill{display:block;height:100%;width:0;background:var(--ok);border-radius:100px;transition:width .25s ease}
+.osteps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.osteps li{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.55}
+.osteps li .pn{margin-top:1px}
+.osteps b{font-weight:600;color:var(--brand)}
+.gantt{position:relative;margin:18px 0 6px}
+.gpw{position:absolute;left:160px;right:0;top:0;bottom:22px;pointer-events:none}
+.gp{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--accent);display:block}
+.gsg{font-weight:600;font-size:12px;color:var(--brand);margin:12px 0 4px}
+.gr{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin:6px 0;font-size:13px;font-weight:500}
+.gr .tr{position:relative;height:14px;background:var(--panel);border-radius:100px}
+.gb{position:absolute;top:0;height:14px;border-radius:100px;display:block;background:var(--line);transition:background .2s}
+.gb.run{background:repeating-linear-gradient(45deg,#FF2947 0 6px,#FF7A8E 6px 12px);background-size:17px 17px;animation:stp 1s linear infinite}
+.gb.done{background:#121E6C}
+@keyframes stp{to{background-position:17px 0}}
+.gh{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin:6px 0 0 160px}
+.sdot2{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block;flex:none}
+.sdot2.run{background:var(--accent)}.sdot2.done{background:var(--ok)}
+.stages{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.stages .svc h3{font-size:15px}
+@media (prefers-reduced-motion:reduce){.gb.run{animation:none}}
+.use .phone{flex:none}
+.ctl{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:18px}
+.ctl h4{margin:0 0 8px;font-weight:600;font-size:13px;color:var(--brand)}
+.dtl summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--brand);margin-bottom:10px}
+.dtl .insp{margin-bottom:12px}
+.legend li{cursor:pointer}
+/* Sin saltos de layout: mismo alto en skeleton, contenido y error */
+.mod[data-m=dash]>.dash{height:154px}
+.dtext.skt{gap:2px}
+.lsk{display:flex;flex-direction:column;align-items:center;gap:4px}
+.hlist{height:220px}
+.plist{height:256px}
+.prow.skr{height:52px;padding:4px 0;gap:16px}
+.mod[data-m=mov] .errflat{height:220px}
+.mod[data-m=prod] .errflat{height:256px}
+.mpa .m{top:34px;height:40px;background:#E3E6F3}
+.mpa .bt{top:88px}
+.mpa.yes .m{animation:ym 5s ease-in-out infinite}
+.mpa.yes .bt{animation:yb 5s ease-in-out infinite}
+.mpa.no .m{animation:nm 5s ease-in-out infinite}
+.mpa.no .bt{animation:nb 5s ease-in-out infinite}
+@keyframes ym{0%,25%{height:40px;background:#E3E6F3}45%,85%{height:64px;background:#B9C2EA}100%{height:40px;background:#E3E6F3}}
+@keyframes yb{0%,25%{top:88px}45%,85%{top:112px}100%{top:88px}}
+@keyframes nm{0%,25%{height:40px;opacity:1}45%,85%{height:0;opacity:0}100%{height:40px;opacity:1}}
+@keyframes nb{0%,25%{top:88px}45%,85%{top:48px}100%{top:88px}}
+.mpa .lb{position:absolute;left:0;right:0;bottom:10px;text-align:center;font:600 11px Montserrat,sans-serif;color:var(--muted);opacity:0}
+.mpa .lb.a{animation:lba 5s infinite}
+.mpa .lb.b{animation:lbb 5s infinite}
+@keyframes lba{0%,30%{opacity:1}38%,94%{opacity:0}100%{opacity:1}}
+@keyframes lbb{0%,38%{opacity:0}45%,85%{opacity:1}92%,100%{opacity:0}}
+.mod[data-m=carr]{overflow:hidden;transition:max-height .35s ease,margin-bottom .35s ease,opacity .3s ease}
+.mod[data-m=carr][data-state=skeleton]{display:block;max-height:0;margin-bottom:-40px;opacity:0}
+.mod[data-m=carr][data-state=loaded]{max-height:80px;margin-bottom:0;opacity:1}
+@media (prefers-reduced-motion:reduce){
+.mod[data-m=carr]{transition:none}
+.mpa.yes .m,.mpa.yes .bt,.mpa.no .m,.mpa.no .bt,.mpa .lb{animation:none}
+.mpa.yes .m{height:64px;background:#B9C2EA}.mpa.yes .bt{top:112px}
+.mpa.no .m{height:0}.mpa.no .bt{top:48px}.mpa .lb.b{opacity:1}}
+.ljl,.step{font-weight:600}
+.fa,.arrow{font-weight:500}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="#/">Guía de Skeleton views</a><nav class="areas" id="areas" aria-label="Áreas"></nav><span class="tag neutral ver">v0.1 borrador</span></header>
+<div class="shell"><aside class="side" id="side" aria-label="Páginas del área"></aside><main id="main"></main></div>
+<div id="holder" hidden></div>
+<div class="sr" id="live" aria-live="polite"></div>
+<script>
+/* ---------- Íconos exportados del Figma ---------- */
+const ICONS={
+chevDown:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M17.2 5.87C17.37 5.71 17.63 5.71 17.79 5.87C17.96 6.03 17.96 6.29 17.79 6.46L10 14.25L2.21 6.46C2.04 6.29 2.04 6.03 2.21 5.87C2.37 5.71 2.63 5.71 2.79 5.87L10 13.07L17.2 5.87Z" fill="#121E6C"/></svg>`,
+menu:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17.08 12C17.08 13.1 17.96 14 19.04 14C20.12 14 21 13.1 21 12C21 10.9 20.12 10 19.04 10C17.96 10 17.08 10.9 17.08 12Z" fill="#FF2947"/><path d="M10.08 12C10.08 13.1 10.96 14 12.04 14C13.12 14 14 13.1 14 12C14 10.9 13.12 10 12.04 10C10.96 10 10.08 10.9 10.08 12Z" fill="#FF2947"/><path d="M3 12C3 13.1 3.88 14 4.96 14C6.04 14 6.92 13.1 6.92 12C6.92 10.9 6.04 10 4.96 10C3.88 10 3 10.9 3 12Z" fill="#FF2947"/></svg>`,
+view:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M1.19 11.75C1.2 11.75 1.2 11.76 1.21 11.76C1.35 11.96 1.57 12.24 1.86 12.59C2.42 13.27 3.24 14.18 4.25 15.08C6.29 16.91 9.03 18.67 12 18.67C14.97 18.67 17.71 16.91 19.75 15.08C20.76 14.18 21.58 13.27 22.14 12.59C22.43 12.24 22.65 11.96 22.79 11.76C22.8 11.76 22.8 11.75 22.81 11.75C22.66 11.57 22.44 11.31 22.16 11C21.59 10.38 20.77 9.55 19.76 8.73C17.73 7.06 14.99 5.46 12 5.46C9.01 5.46 6.27 7.06 4.24 8.73C3.23 9.55 2.41 10.38 1.84 11C1.56 11.31 1.34 11.57 1.19 11.75ZM23.41 11.73L23.79 11.44L24 11.72L23.8 12L23.41 11.73ZM0.59 11.73C0.2 12 0.2 12 0.2 12L0.2 12.01L0.2 12.01L0.21 12.03C0.22 12.04 0.24 12.07 0.26 12.09C0.3 12.15 0.36 12.23 0.44 12.34C0.6 12.55 0.82 12.84 1.12 13.2C1.71 13.9 2.56 14.85 3.61 15.8C5.7 17.67 8.67 19.63 12 19.63C15.33 19.63 18.3 17.67 20.39 15.8C21.44 14.85 22.29 13.9 22.88 13.2C23.18 12.84 23.4 12.55 23.56 12.34C23.64 12.23 23.7 12.15 23.74 12.09C23.76 12.07 23.78 12.04 23.79 12.03L23.8 12.01L23.8 12.01L23.8 12C23.8 12 23.8 12 23.41 11.73C23.79 11.44 23.79 11.44 23.79 11.44L23.79 11.44L23.79 11.44L23.77 11.42C23.76 11.41 23.75 11.39 23.73 11.36C23.69 11.31 23.63 11.23 23.55 11.14C23.39 10.95 23.16 10.68 22.87 10.35C22.28 9.71 21.43 8.85 20.37 7.98C18.27 6.27 15.31 4.5 12 4.5C8.69 4.5 5.73 6.27 3.63 7.98C2.57 8.85 1.72 9.71 1.13 10.35C0.84 10.68 0.61 10.95 0.45 11.14C0.37 11.23 0.31 11.31 0.27 11.36C0.25 11.39 0.24 11.41 0.23 11.42L0.21 11.44L0.21 11.44L0.21 11.44C0.21 11.44 0.21 11.44 0.59 11.73ZM0.59 11.73L0.21 11.44L0 11.72L0.2 12L0.59 11.73Z" fill="#969696"/><path fill-rule="evenodd" d="M12 7.93C9.72 7.93 7.87 9.78 7.87 12.06C7.87 14.35 9.72 16.2 12 16.2C14.28 16.2 16.13 14.35 16.13 12.06C16.13 9.78 14.28 7.93 12 7.93ZM6.91 12.06C6.91 9.25 9.19 6.97 12 6.97C14.81 6.97 17.09 9.25 17.09 12.06C17.09 14.87 14.81 17.15 12 17.15C9.19 17.15 6.91 14.87 6.91 12.06Z" fill="#969696"/></svg>`,
+send:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" d="M25.61 3.47C25.84 2.8 25.2 2.16 24.53 2.39L2.91 9.58C2.17 9.83 2.13 10.88 2.86 11.19L12.44 15.15C12.61 15.2 12.75 15.32 12.82 15.49L16.81 25.13C17.12 25.86 18.17 25.82 18.42 25.07L25.61 3.47ZM11.84 16.17L2.41 12.26L2.41 12.26C0.7 11.54 0.77 9.07 2.55 8.48L24.16 1.28C25.74 0.75 27.25 2.26 26.72 3.84L19.52 25.44C18.93 27.21 16.46 27.31 15.74 25.58L11.84 16.17Z" fill="url(#gsend)"/><path fill-rule="evenodd" d="M26.02 1.97C26.25 2.2 26.25 2.56 26.02 2.79L12.69 16.13C12.46 16.36 12.09 16.36 11.86 16.13C11.63 15.9 11.63 15.53 11.86 15.3L25.2 1.97C25.42 1.74 25.79 1.74 26.02 1.97Z" fill="url(#gsend)"/><defs><radialGradient id="gsend" cx="0" cy="0" r="1" gradientTransform="matrix(23.64 -8.98 7.23 41.4 1.5 12)" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+scan:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" d="M4.19 18.38C4.54 18.38 4.82 18.67 4.82 19.01V21.96C4.82 22.64 5.37 23.19 6.05 23.19H8.99C9.34 23.19 9.62 23.47 9.62 23.82C9.62 24.17 9.34 24.45 8.99 24.45H6.05C4.67 24.45 3.56 23.34 3.56 21.96V19.01C3.56 18.67 3.84 18.38 4.19 18.38Z" fill="url(#gscan)"/><path fill-rule="evenodd" d="M3.55 6.04C3.55 4.66 4.66 3.55 6.04 3.55H8.98C9.33 3.55 9.61 3.83 9.61 4.18C9.61 4.53 9.33 4.81 8.98 4.81H6.04C5.35 4.81 4.8 5.36 4.8 6.04V8.99C4.8 9.33 4.52 9.62 4.18 9.62C3.83 9.62 3.55 9.33 3.55 8.99V6.04Z" fill="url(#gscan)"/><path fill-rule="evenodd" d="M18.38 4.18C18.38 3.83 18.66 3.55 19.01 3.55H21.95C23.33 3.55 24.44 4.66 24.44 6.04V8.99C24.44 9.33 24.16 9.62 23.81 9.62C23.47 9.62 23.18 9.33 23.18 8.99V6.04C23.18 5.36 22.64 4.81 21.95 4.81H19.01C18.66 4.81 18.38 4.53 18.38 4.18Z" fill="url(#gscan)"/><path fill-rule="evenodd" d="M23.83 18.38C24.17 18.38 24.45 18.67 24.45 19.01V21.96C24.45 23.34 23.34 24.45 21.96 24.45H19.02C18.67 24.45 18.39 24.17 18.39 23.82C18.39 23.47 18.67 23.19 19.02 23.19H21.96C22.65 23.19 23.2 22.64 23.2 21.96V19.01C23.2 18.67 23.48 18.38 23.83 18.38Z" fill="url(#gscan)"/><path fill-rule="evenodd" d="M2.51 13.77C2.51 13.42 2.8 13.14 3.14 13.14H24.86C25.2 13.14 25.49 13.42 25.49 13.77C25.49 14.11 25.2 14.4 24.86 14.4H3.14C2.8 14.4 2.51 14.11 2.51 13.77Z" fill="url(#gscan)"/><defs><radialGradient id="gscan" cx="0" cy="0" r="1" gradientTransform="matrix(15.73 -17.88 27.12 28.98 8.24 22.93)" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+withdrawal:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" d="M2.92 5.12V5.31C2.92 6.17 3.61 6.87 4.47 6.87H4.79V3.75H4.46C3.67 3.75 3.01 4.34 2.92 5.12ZM4.46 2.58C2.95 2.58 1.74 3.8 1.74 5.31V5.9H1.81C2.08 7.12 3.17 8.03 4.47 8.03H4.79V23.14C4.79 24.4 5.81 25.42 7.07 25.42H20.96C22.22 25.42 23.24 24.4 23.24 23.14V8.02H23.54C25.04 8.02 26.26 6.8 26.26 5.3C26.26 3.8 25.04 2.58 23.54 2.58H4.46ZM5.96 3.75V7.33C5.97 7.37 5.97 7.41 5.97 7.45C5.97 7.49 5.97 7.53 5.96 7.57V23.14C5.96 23.75 6.46 24.25 7.07 24.25H20.96C21.58 24.25 22.07 23.75 22.07 23.14V3.75H5.96ZM23.24 3.75V6.85H23.54C24.4 6.85 25.09 6.16 25.09 5.3C25.09 4.45 24.4 3.75 23.54 3.75H23.24Z" fill="url(#gwithdrawal)"/><path fill-rule="evenodd" d="M4.87 20.07C4.87 19.74 5.13 19.48 5.45 19.48C8.4 19.48 10.8 21.88 10.8 24.83C10.8 25.15 10.54 25.41 10.21 25.41C9.89 25.41 9.63 25.15 9.63 24.83C9.63 22.52 7.76 20.65 5.45 20.65C5.13 20.65 4.87 20.39 4.87 20.07Z" fill="url(#gwithdrawal)"/><path fill-rule="evenodd" d="M17.83 25.41C17.5 25.41 17.24 25.15 17.24 24.83C17.24 21.88 19.64 19.48 22.59 19.48C22.91 19.48 23.17 19.74 23.17 20.07C23.17 20.39 22.91 20.65 22.59 20.65C20.28 20.65 18.41 22.52 18.41 24.83C18.41 25.15 18.15 25.41 17.83 25.41Z" fill="url(#gwithdrawal)"/><path fill-rule="evenodd" d="M13.85 13.21C14.19 13.21 14.37 12.96 14.37 12.79C14.37 12.61 14.19 12.37 13.85 12.37C12.98 12.37 12.16 11.7 12.16 10.78C12.16 9.86 12.96 9.19 13.85 9.19C14.64 9.19 15.37 9.72 15.52 10.51C15.58 10.82 15.37 11.13 15.06 11.19C14.74 11.25 14.43 11.04 14.37 10.73C14.34 10.55 14.15 10.36 13.85 10.36C13.5 10.36 13.32 10.6 13.32 10.78C13.32 10.95 13.51 11.2 13.85 11.2C14.72 11.2 15.54 11.86 15.54 12.79C15.54 13.71 14.72 14.37 13.85 14.37C13.07 14.37 12.37 13.86 12.2 13.12C12.12 12.8 12.32 12.49 12.63 12.42C12.95 12.34 13.26 12.54 13.33 12.85C13.37 13.02 13.56 13.21 13.85 13.21Z" fill="url(#gwithdrawal)"/><path fill-rule="evenodd" d="M13.85 10.36C13.53 10.36 13.27 10.1 13.27 9.78V8.97C13.27 8.65 13.53 8.39 13.85 8.39C14.17 8.39 14.43 8.65 14.43 8.97V9.78C14.43 10.1 14.17 10.36 13.85 10.36Z" fill="url(#gwithdrawal)"/><path fill-rule="evenodd" d="M13.85 15.19C13.53 15.19 13.27 14.93 13.27 14.61V13.87C13.27 13.55 13.53 13.29 13.85 13.29C14.17 13.29 14.43 13.55 14.43 13.87V14.61C14.43 14.93 14.17 15.19 13.85 15.19Z" fill="url(#gwithdrawal)"/><path fill-rule="evenodd" d="M13.85 16.22C16.3 16.22 18.28 14.23 18.28 11.78C18.28 9.33 16.3 7.35 13.85 7.35C11.4 7.35 9.42 9.33 9.42 11.78C9.42 14.23 11.4 16.22 13.85 16.22ZM19.45 11.78C19.45 14.88 16.94 17.38 13.85 17.38C10.76 17.38 8.25 14.88 8.25 11.78C8.25 8.69 10.76 6.18 13.85 6.18C16.94 6.18 19.45 8.69 19.45 11.78Z" fill="url(#gwithdrawal)"/><defs><radialGradient id="gwithdrawal" cx="0" cy="0" r="1" gradientTransform="matrix(16.79 -19.53 28.95 31.66 7.85 23.76)" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+charge:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M13.21 20.04C11.47 20.04 9.99 18.9 9.69 17.32C9.64 17.01 9.85 16.71 10.16 16.65C10.48 16.59 10.78 16.8 10.84 17.11C11.04 18.14 12.03 18.89 13.21 18.89C14.52 18.89 15.61 17.94 15.61 16.78C15.61 15.61 14.54 14.66 13.21 14.66C11.23 14.66 9.64 13.2 9.64 11.38C9.64 9.56 11.23 8.1 13.21 8.1C14.89 8.1 16.36 9.19 16.69 10.71C16.76 11.03 16.57 11.34 16.25 11.41C15.94 11.48 15.62 11.28 15.55 10.97C15.33 9.99 14.34 9.26 13.19 9.26C11.88 9.26 10.79 10.21 10.79 11.38C10.79 12.54 11.86 13.5 13.19 13.5C15.17 13.5 16.76 14.97 16.76 16.78C16.76 18.59 15.17 20.05 13.19 20.05L13.21 20.04Z" fill="url(#gcharge)"/><path d="M13.21 22.2C12.88 22.2 12.62 21.95 12.62 21.62V19.47C12.62 19.14 12.88 18.89 13.21 18.89C13.53 18.89 13.79 19.14 13.79 19.47V21.62C13.79 21.95 13.53 22.2 13.21 22.2Z" fill="url(#gcharge)"/><path d="M13.21 9.05C12.88 9.05 12.62 8.8 12.62 8.47V6.5C12.62 6.17 12.88 5.92 13.21 5.92C13.53 5.92 13.79 6.17 13.79 6.5V8.47C13.79 8.8 13.53 9.05 13.21 9.05Z" fill="url(#gcharge)"/><path d="M13.16 26.09C12.73 26.09 12.3 26.06 11.85 26.02C8.68 25.68 5.82 24.11 3.81 21.63C1.81 19.14 0.9 16.02 1.24 12.85C1.57 9.67 3.14 6.81 5.62 4.81C8.57 2.43 12.38 1.6 16.06 2.52C16.38 2.6 16.57 2.92 16.48 3.23C16.4 3.55 16.09 3.73 15.77 3.65C12.45 2.81 9.02 3.57 6.36 5.72C4.12 7.53 2.71 10.1 2.4 12.97C2.1 15.84 2.93 18.66 4.74 20.91C6.54 23.15 9.12 24.56 11.99 24.86C14.86 25.16 17.67 24.34 19.93 22.53C22.59 20.38 24.06 17.18 23.94 13.77C23.94 13.44 24.18 13.17 24.5 13.16C24.86 13.16 25.09 13.4 25.11 13.72C25.23 17.51 23.6 21.06 20.65 23.44C18.5 25.16 15.89 26.09 13.16 26.09Z" fill="url(#gcharge)"/><path d="M22.52 10.32C22.19 10.32 21.93 10.07 21.93 9.74V1.75C21.92 1.42 22.18 1.17 22.5 1.17C22.83 1.17 23.09 1.42 23.09 1.75V9.74C23.1 10.07 22.84 10.32 22.52 10.32Z" fill="url(#gcharge)"/><path d="M18.51 6.34C18.19 6.34 17.93 6.08 17.93 5.75C17.93 5.43 18.19 5.17 18.51 5.17H26.51V5.16C26.83 5.16 27.09 5.41 27.09 5.74C27.09 6.07 26.83 6.32 26.51 6.32H18.51V6.34Z" fill="url(#gcharge)"/><defs><radialGradient id="gcharge" cx="0" cy="0" r="1" gradientTransform="matrix(17.75 -21.32 30.6 34.56 7.63 24.28)" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+chevRight:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7.75 4.59C7.58 4.42 7.58 4.15 7.75 3.98C7.92 3.82 8.19 3.82 8.36 3.98L16.37 12L8.36 20.02C8.19 20.18 7.92 20.18 7.75 20.02C7.58 19.85 7.58 19.58 7.75 19.41L15.16 12L7.75 4.59Z" fill="#121E6C"/></svg>`,
+qr:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" d="M1.75 19.86C2.07 19.86 2.33 20.12 2.33 20.44V22.23C2.33 24.26 3.99 25.91 6.02 25.91H7.81C8.13 25.91 8.39 26.17 8.39 26.5C8.39 26.82 8.13 27.08 7.81 27.08H6.02C3.34 27.08 1.17 24.9 1.17 22.23V20.44C1.17 20.12 1.43 19.86 1.75 19.86Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M1.17 6.02C1.17 3.34 3.34 1.17 6.02 1.17H7.81C8.13 1.17 8.39 1.43 8.39 1.75C8.39 2.07 8.13 2.33 7.81 2.33H6.02C3.99 2.33 2.33 3.99 2.33 6.02V7.8C2.33 8.13 2.07 8.39 1.75 8.39C1.43 8.39 1.17 8.13 1.17 7.8V6.02Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M19.86 1.75C19.86 1.43 20.12 1.17 20.44 1.17H22.23C24.9 1.17 27.08 3.34 27.08 6.02V7.8C27.08 8.13 26.82 8.39 26.5 8.39C26.17 8.39 25.91 8.13 25.91 7.8V6.02C25.91 3.99 24.26 2.33 22.23 2.33H20.44C20.12 2.33 19.86 2.07 19.86 1.75Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M26.5 19.86C26.82 19.86 27.08 20.12 27.08 20.44V22.23C27.08 24.9 24.9 27.08 22.23 27.08H20.44C20.12 27.08 19.86 26.82 19.86 26.5C19.86 26.17 20.12 25.91 20.44 25.91H22.23C24.26 25.91 25.91 24.26 25.91 22.23V20.44C25.91 20.12 26.17 19.86 26.5 19.86Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M6.35 5.35C5.8 5.35 5.36 5.8 5.36 6.35V11.29C5.36 11.84 5.8 12.29 6.35 12.29H11.29C11.84 12.29 12.29 11.84 12.29 11.29V6.35C12.29 5.8 11.84 5.35 11.29 5.35H6.35ZM4.19 6.35C4.19 5.15 5.15 4.19 6.35 4.19H11.29C12.49 4.19 13.45 5.15 13.45 6.35V11.29C13.45 12.49 12.49 13.45 11.29 13.45H6.35C5.15 13.45 4.19 12.49 4.19 11.29V6.35Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M16.93 5.35C16.38 5.35 15.94 5.8 15.94 6.35V11.29C15.94 11.84 16.38 12.29 16.93 12.29H21.88C22.42 12.29 22.87 11.84 22.87 11.29V6.35C22.87 5.8 22.42 5.35 21.88 5.35H16.93ZM14.77 6.35C14.77 5.15 15.74 4.19 16.93 4.19H21.88C23.07 4.19 24.03 5.15 24.03 6.35V11.29C24.03 12.49 23.07 13.45 21.88 13.45H16.93C15.74 13.45 14.77 12.49 14.77 11.29V6.35Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M6.35 15.94C5.8 15.94 5.36 16.38 5.36 16.93V21.88C5.36 22.42 5.8 22.87 6.35 22.87H11.29C11.84 22.87 12.29 22.42 12.29 21.88V16.93C12.29 16.38 11.84 15.94 11.29 15.94H6.35ZM4.19 16.93C4.19 15.74 5.15 14.77 6.35 14.77H11.29C12.49 14.77 13.45 15.74 13.45 16.93V21.88C13.45 23.07 12.49 24.03 11.29 24.03H6.35C5.15 24.03 4.19 23.07 4.19 21.88V16.93Z" fill="url(#gqr)"/><path fill-rule="evenodd" d="M16.93 15.94C16.38 15.94 15.94 16.38 15.94 16.93V21.88C15.94 22.42 16.38 22.87 16.93 22.87H21.88C22.42 22.87 22.87 22.42 22.87 21.88V16.93C22.87 16.38 22.42 15.94 21.88 15.94H16.93ZM14.77 16.93C14.77 15.74 15.74 14.77 16.93 14.77H21.88C23.07 14.77 24.03 15.74 24.03 16.93V21.88C24.03 23.07 23.07 24.03 21.88 24.03H16.93C15.74 24.03 14.77 23.07 14.77 21.88V16.93Z" fill="url(#gqr)"/><defs><radialGradient id="gqr" cx="0" cy="0" r="1" gradientTransform="matrix(17.74 -22.17 30.59 35.93 7.63 25.2)" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+copy:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" d="M10.21 7.74C8.85 7.74 7.74 8.85 7.74 10.21V22.06C7.74 23.42 8.85 24.53 10.21 24.53H22.06C23.42 24.53 24.53 23.42 24.53 22.06V10.21C24.53 8.85 23.42 7.74 22.06 7.74H10.21ZM6.6 10.21C6.6 8.22 8.22 6.6 10.21 6.6H22.06C24.05 6.6 25.67 8.22 25.67 10.21V22.06C25.67 24.05 24.05 25.67 22.06 25.67H10.21C8.22 25.67 6.6 24.05 6.6 22.06V10.21Z" fill="url(#gcopy)"/><path fill-rule="evenodd" d="M6.32 2.33L6.32 2.33L17.84 2.33C18.78 2.34 19.69 2.71 20.35 3.38C21.02 4.04 21.4 4.95 21.4 5.89L21.4 5.9L21.37 7.18C21.36 7.5 21.1 7.75 20.79 7.74C20.48 7.73 20.23 7.47 20.23 7.16L20.26 5.89C20.26 5.25 20 4.63 19.55 4.18C19.1 3.73 18.48 3.47 17.84 3.47H6.32C5.56 3.47 4.84 3.77 4.31 4.31C3.77 4.84 3.47 5.56 3.47 6.32V17.84C3.47 18.48 3.73 19.1 4.18 19.55C4.64 20 5.25 20.26 5.89 20.26H7.17C7.48 20.26 7.74 20.51 7.74 20.83C7.74 21.14 7.48 21.4 7.17 21.4H5.89L5.89 21.4C4.95 21.4 4.04 21.02 3.38 20.35C2.71 19.69 2.34 18.79 2.33 17.84L2.33 17.84V6.32C2.34 5.26 2.76 4.25 3.5 3.5C4.25 2.76 5.26 2.34 6.32 2.33Z" fill="url(#gcopy)"/><defs><radialGradient id="gcopy" cx="0" cy="0" r="1" gradientTransform="matrix(15.98 -19.96 27.54 32.36 8.15 23.98)" gradientUnits="userSpaceOnUse"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+arrowDown:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M11.32 1.72C11.6 1.72 11.82 1.95 11.82 2.22V21.28L19.55 13.53C19.75 13.33 20.07 13.33 20.26 13.53C20.46 13.72 20.46 14.04 20.26 14.23L11.37 23.14L2.47 14.23C2.28 14.04 2.28 13.72 2.47 13.53C2.67 13.33 2.99 13.33 3.18 13.53L10.82 21.18V2.22C10.82 1.95 11.04 1.72 11.32 1.72Z" fill="#04B255"/></svg>`,
+arrowUp:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M11.37 0.86L20.26 9.77C20.46 9.96 20.46 10.28 20.26 10.47C20.07 10.67 19.75 10.67 19.55 10.47L11.82 2.72V21.78C11.82 22.05 11.6 22.28 11.32 22.28C11.04 22.28 10.82 22.05 10.82 21.78V2.82L3.18 10.47C2.99 10.67 2.67 10.67 2.47 10.47C2.28 10.28 2.28 9.96 2.47 9.77L11.37 0.86Z" fill="#C31A2F"/></svg>`,
+savings:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M10.23 4.6C10.23 4.97 10.28 5.33 10.39 5.68C10.03 5.8 9.7 5.97 9.4 6.19C9.18 6.35 9.13 6.66 9.3 6.89C9.46 7.11 9.77 7.16 10 6.99C10.41 6.68 11.02 6.49 11.72 6.37C12.41 6.25 13.15 6.22 13.82 6.22C15.29 6.22 16.57 6.57 17.46 7.27C17.68 7.44 17.99 7.41 18.16 7.19C18.33 6.97 18.3 6.66 18.08 6.49C17.8 6.27 17.5 6.08 17.18 5.92C17.34 5.51 17.43 5.07 17.43 4.6C17.43 2.61 15.82 1 13.83 1C11.84 1 10.23 2.61 10.23 4.6ZM13.83 2C12.4 2 11.23 3.17 11.23 4.6C11.23 4.88 11.27 5.16 11.36 5.42C11.42 5.4 11.49 5.39 11.55 5.38C12.32 5.25 13.13 5.22 13.82 5.22C14.67 5.22 15.49 5.33 16.25 5.56C16.37 5.26 16.43 4.94 16.43 4.6C16.43 3.17 15.26 2 13.83 2Z" fill="#1E1E1E"/><path d="M7.05 2.29C6.25 1.98 5.39 2.45 5.18 3.27C4.94 4.26 4.92 5.27 4.95 5.93C4.04 6.77 3.31 7.75 2.84 8.84C2.1 8.71 1.41 9.19 1.2 9.88L1.2 9.88C1 10.56 0.86 11.59 1.23 12.79L1.24 12.8C1.33 13.07 1.49 13.3 1.7 13.49L1.71 13.5L1.72 13.5C1.95 13.69 2.25 13.85 2.59 13.96C3.19 15.85 4.52 17.45 6.3 18.59L6.72 20.78C6.86 21.53 7.51 22.09 8.29 22.09H9.5C10.45 22.09 11.17 21.29 11.1 20.35L11.09 20.3C11.62 20.37 12.17 20.41 12.73 20.41C13.63 20.41 14.5 20.32 15.33 20.14L15.31 20.35L15.31 20.35C15.24 21.27 15.96 22.09 16.91 22.09H18.12C18.89 22.09 19.56 21.54 19.69 20.78L20.26 17.78C22.07 16.23 23.21 14.1 23.21 11.74C23.21 8.82 21.47 6.27 18.88 4.71C18.64 4.57 18.33 4.65 18.19 4.88C18.05 5.12 18.13 5.43 18.36 5.57C20.73 6.99 22.21 9.24 22.21 11.74C22.21 13.82 21.19 15.72 19.48 17.12L19.34 17.24L18.71 20.6L18.71 20.6C18.66 20.88 18.41 21.09 18.12 21.09H16.91C16.56 21.09 16.28 20.79 16.31 20.43L16.31 20.43L16.45 18.82L15.76 19.01C14.81 19.27 13.79 19.41 12.73 19.41C12 19.41 11.3 19.34 10.63 19.22L9.98 19.1L10.1 20.43C10.13 20.8 9.85 21.09 9.5 21.09H8.29C8.01 21.09 7.76 20.89 7.7 20.6L7.2 17.97L7.01 17.85C5.23 16.77 3.96 15.2 3.47 13.42L3.39 13.12L3.09 13.06C2.79 13 2.53 12.87 2.35 12.73C2.27 12.65 2.21 12.57 2.19 12.49C1.88 11.53 2 10.7 2.16 10.16C2.23 9.92 2.47 9.79 2.68 9.83C2.8 9.86 2.89 9.88 2.97 9.91L3.44 10.08L3.61 9.61C4.03 8.45 4.78 7.4 5.79 6.52L5.98 6.35L5.96 6.11C5.92 5.53 5.91 4.49 6.16 3.51L6.16 3.51C6.22 3.27 6.47 3.14 6.69 3.23C7.19 3.42 7.91 3.8 8.69 4.52C8.9 4.71 9.21 4.69 9.4 4.49C9.59 4.28 9.57 3.97 9.37 3.78C8.49 2.98 7.67 2.54 7.05 2.29Z" fill="#1E1E1E"/></svg>`,
+yield:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M22.91 5.19C23.17 5.19 23.39 5.4 23.39 5.67V9.73C23.39 9.99 23.17 10.21 22.91 10.21C22.64 10.21 22.43 9.99 22.43 9.73V5.67C22.43 5.4 22.64 5.19 22.91 5.19Z" fill="currentColor"/><path fill-rule="evenodd" d="M18.5 5.67C18.5 5.4 18.72 5.19 18.98 5.19H22.91C23.17 5.19 23.39 5.4 23.39 5.67C23.39 5.93 23.17 6.15 22.91 6.15H18.98C18.72 6.15 18.5 5.93 18.5 5.67Z" fill="currentColor"/><path fill-rule="evenodd" d="M23.25 5.33C23.44 5.51 23.44 5.82 23.25 6.01L14.84 14.43L10.26 9.85L1.43 18.67C1.24 18.86 0.94 18.86 0.75 18.67C0.56 18.48 0.56 18.18 0.75 17.99L10.26 8.49L14.84 13.07L22.57 5.33C22.76 5.14 23.06 5.14 23.25 5.33Z" fill="currentColor"/></svg>`,
+filter:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M17.07 4.96C15.64 4.96 14.46 6.17 14.46 7.7C14.46 9.23 15.64 10.43 17.07 10.43C18.49 10.43 19.68 9.23 19.68 7.7C19.68 6.17 18.49 4.96 17.07 4.96ZM13.5 7.7C13.5 5.67 15.08 4 17.07 4C19.06 4 20.64 5.67 20.64 7.7C20.64 9.72 19.06 11.39 17.07 11.39C15.08 11.39 13.5 9.72 13.5 7.7Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M19.67 7.7C19.67 7.43 19.89 7.22 20.15 7.22H23.52C23.79 7.22 24 7.43 24 7.7C24 7.96 23.79 8.18 23.52 8.18H20.15C19.89 8.18 19.67 7.96 19.67 7.7Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M0 7.7C0 7.43 0.21 7.22 0.48 7.22H13.98C14.24 7.22 14.46 7.43 14.46 7.7C14.46 7.96 14.24 8.18 13.98 8.18H0.48C0.21 8.18 0 7.96 0 7.7Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M6.93 13.77C5.51 13.77 4.32 14.98 4.32 16.51C4.32 18.04 5.51 19.24 6.93 19.24C8.36 19.24 9.54 18.04 9.54 16.51C9.54 14.98 8.36 13.77 6.93 13.77ZM3.36 16.51C3.36 14.49 4.94 12.81 6.93 12.81C8.92 12.81 10.5 14.49 10.5 16.51C10.5 18.53 8.92 20.2 6.93 20.2C4.94 20.2 3.36 18.53 3.36 16.51Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M0 16.51C0 16.24 0.21 16.03 0.48 16.03H3.85C4.11 16.03 4.33 16.24 4.33 16.51C4.33 16.77 4.11 16.99 3.85 16.99H0.48C0.21 16.99 0 16.77 0 16.51Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M9.54 16.51C9.54 16.24 9.76 16.03 10.02 16.03H23.52C23.79 16.03 24 16.24 24 16.51C24 16.77 23.79 16.99 23.52 16.99H10.02C9.76 16.99 9.54 16.77 9.54 16.51Z" fill="#1E1E1E"/></svg>`,
+debit:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M3.8 5C2.81 5 2 5.81 2 6.8V16.84C2 17.83 2.81 18.64 3.8 18.64H20.43C21.41 18.64 22.22 17.83 22.22 16.85V6.8C22.22 5.81 21.41 5 20.42 5H3.8ZM1 6.8C1 5.25 2.25 4 3.8 4H20.42C21.97 4 23.22 5.25 23.22 6.8V16.85C23.22 18.39 21.97 19.64 20.43 19.64H3.8C2.25 19.64 1 18.39 1 16.84V6.8Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M3.18 16.27C3.18 15.99 3.4 15.77 3.68 15.77H6.21C6.49 15.77 6.71 15.99 6.71 16.27C6.71 16.55 6.49 16.77 6.21 16.77H3.68C3.4 16.77 3.18 16.55 3.18 16.27Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M7.54 16.27C7.54 15.99 7.76 15.77 8.04 15.77H15.13C15.41 15.77 15.63 15.99 15.63 16.27C15.63 16.55 15.41 16.77 15.13 16.77H8.04C7.76 16.77 7.54 16.55 7.54 16.27Z" fill="#1E1E1E"/><path fill-rule="evenodd" d="M4.93 7.17C4.52 7.17 4.18 7.51 4.18 7.92V8.63C4.18 9.04 4.52 9.38 4.93 9.38H7.32C7.73 9.38 8.07 9.04 8.07 8.63V7.92C8.07 7.51 7.73 7.17 7.32 7.17H4.93ZM3.18 7.92C3.18 6.95 3.96 6.17 4.93 6.17H7.32C8.29 6.17 9.07 6.95 9.07 7.92V8.63C9.07 9.6 8.29 10.38 7.32 10.38H4.93C3.96 10.38 3.18 9.6 3.18 8.63V7.92Z" fill="#1E1E1E"/></svg>`,
+key:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.82 0.84C15.66 0.69 18.3 2.52 19.03 5.28C19.87 8.42 17.94 12.09 14.63 12.65C13.72 12.81 13 12.75 12.09 12.7C11.86 12.69 11.71 12.65 11.51 12.78C10.97 13.12 10.69 13.85 10.08 14.07C9.48 14.29 8.67 14.02 8.03 14.11C7.97 14.12 7.83 14.23 7.82 14.28C7.77 15.05 8.06 15.99 7.28 16.48C7.03 16.63 6.87 16.63 6.6 16.64C6.2 16.64 5.81 16.63 5.42 16.65L5.3 16.83C5.26 17.57 5.48 18.32 4.82 18.86C4.17 19.39 2.86 19.05 2.06 19.15C1.42 19.1 0.85 18.59 0.8 17.94C0.76 17.43 0.76 16.39 0.87 15.91C0.98 15.44 1.23 15 1.55 14.64L7.18 9.03C7.46 8.7 7.21 8.16 7.13 7.77C6.42 4.22 9.33 1.03 12.82 0.84ZM12.83 1.68C9.98 1.85 7.6 4.32 7.89 7.24C7.98 8.11 8.48 8.83 7.79 9.63L2.12 15.27C1.45 16.05 1.68 16.93 1.64 17.88C1.68 18.11 1.89 18.29 2.11 18.31C2.73 18.36 3.41 18.27 4.03 18.31C4.24 18.29 4.43 18.13 4.45 17.92C4.51 17.44 4.33 16.78 4.58 16.37C4.72 16.14 4.97 15.84 5.25 15.81C5.69 15.78 6.19 15.85 6.63 15.81C6.83 15.8 6.96 15.71 6.98 15.5C7.03 15.07 6.94 14.56 6.98 14.12C7 13.83 7.33 13.52 7.57 13.39C8.04 13.14 8.95 13.32 9.48 13.33C9.61 13.33 9.76 13.32 9.86 13.24C10.29 12.9 10.63 12.26 11.15 12C11.72 11.72 12.38 11.91 12.99 11.93C14.91 11.99 16.46 11.4 17.51 9.75C19.87 6.08 17.17 1.42 12.83 1.68H12.83Z" fill="white"/><path d="M13.71 4.25C15.22 4.18 16.27 5.8 15.5 7.13C14.7 8.54 12.78 8.5 12.04 7.05C11.39 5.78 12.32 4.31 13.71 4.25H13.71ZM13.77 5.09C12.83 5.12 12.34 6.16 12.95 6.9C13.84 7.98 15.39 6.76 14.78 5.66C14.58 5.31 14.17 5.08 13.77 5.09H13.77Z" fill="white"/></svg>`,
+bell:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" d="M8.49 2.28C8.49 1.48 9.15 0.83 9.95 0.83C10.76 0.83 11.41 1.48 11.41 2.28V2.77C14.03 3.43 15.98 5.8 15.98 8.63V13.27C15.98 13.47 16.04 13.66 16.15 13.84L16.23 13.97H16.24L16.36 14.17C16.91 15.05 16.29 16.18 15.25 16.18H4.66C3.62 16.18 3 15.05 3.55 14.17L3.75 13.84C3.86 13.67 3.92 13.47 3.92 13.27V8.63C3.92 5.79 5.87 3.43 8.49 2.77V2.28ZM9.95 1.66C9.61 1.66 9.33 1.94 9.33 2.28V3.45L8.99 3.52C6.58 3.97 4.75 6.08 4.75 8.63V13.27C4.75 13.63 4.64 13.98 4.46 14.27L4.46 14.28L4.25 14.61C4.05 14.94 4.28 15.35 4.66 15.35H15.25C15.6 15.35 15.82 15 15.69 14.69L15.44 14.28L15.44 14.28C15.25 13.97 15.15 13.62 15.15 13.27V8.63C15.15 6.09 13.32 3.97 10.91 3.52L10.58 3.45V2.28C10.58 1.94 10.3 1.66 9.95 1.66Z" fill="white"/><path fill-rule="evenodd" d="M7.22 16.69C7.44 16.61 7.68 16.73 7.75 16.95C8.07 17.86 8.94 18.51 9.95 18.51C10.96 18.51 11.82 17.87 12.14 16.97C12.22 16.75 12.46 16.64 12.68 16.72C12.89 16.8 13 17.03 12.93 17.25C12.48 18.47 11.32 19.34 9.95 19.34C8.58 19.34 7.4 18.46 6.97 17.22C6.89 17 7 16.77 7.22 16.69Z" fill="white"/></svg>`,
+people:`<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path fill-rule="evenodd" d="M10.02 2.53C8.37 2.53 7.03 3.86 7.03 5.51C7.03 7.16 8.37 8.5 10.02 8.5C11.66 8.5 13 7.16 13 5.51C13 3.86 11.66 2.53 10.02 2.53ZM6.2 5.51C6.2 3.4 7.91 1.7 10.02 1.7C12.12 1.7 13.83 3.4 13.83 5.51C13.83 7.62 12.12 9.33 10.02 9.33C7.91 9.33 6.2 7.62 6.2 5.51Z" fill="white"/><path fill-rule="evenodd" d="M10 9.33C7.04 9.34 4.49 11.24 3.66 13.9L3.66 13.9C3.4 14.7 3.28 15.44 3.2 16C3.16 16.37 3.39 16.71 3.74 16.8L3.74 16.8C4.83 17.08 6.89 17.47 9.98 17.47C13.06 17.47 15.15 17.08 16.25 16.8C16.61 16.71 16.84 16.37 16.8 16C16.72 15.44 16.59 14.7 16.34 13.89C15.51 11.24 12.95 9.34 10 9.33ZM9.96 8.5C6.66 8.52 3.8 10.65 2.86 13.64C2.58 14.51 2.46 15.31 2.38 15.89C2.28 16.67 2.76 17.41 3.54 17.61C4.69 17.9 6.81 18.3 9.98 18.3C13.14 18.3 15.29 17.9 16.45 17.61C17.22 17.42 17.72 16.68 17.62 15.89C17.54 15.3 17.41 14.51 17.14 13.65L17.14 13.65C16.2 10.65 13.33 8.52 10.04 8.5C10.04 8.5 10.03 8.5 10.03 8.5C10.02 8.5 10.01 8.5 10 8.5C9.99 8.5 9.98 8.5 9.98 8.5C9.97 8.5 9.96 8.5 9.96 8.5Z" fill="white"/></svg>`,
+chevHdr:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20.65 7.04C20.84 6.85 21.16 6.85 21.35 7.04C21.55 7.24 21.55 7.55 21.35 7.75L12 17.1L2.65 7.75C2.45 7.55 2.45 7.24 2.65 7.04C2.84 6.85 3.16 6.85 3.35 7.04L12 15.69L20.65 7.04Z" fill="white"/></svg>`,
+breb:`<svg width="64" height="36" viewBox="0 0 64 36" fill="none"><path d="M17.98 17.9C17.98 17.9 19.9 17.31 19.69 14.81C19.49 12.47 17.34 11.4 15.02 11.4H8.39C8.13 11.4 7.94 11.65 8.03 11.89L10.35 17.84L8.02 24.31C7.93 24.54 8.12 24.79 8.38 24.79H15.66C18.9 24.79 20.27 22.55 20.27 21.04C20.27 18.41 17.98 17.9 17.98 17.9ZM11.34 13.72H14.89C15.96 13.72 16.9 14.41 16.9 15.47C16.9 16.4 15.94 17.08 14.97 17.08H12.66C12.58 17.08 12.51 17.03 12.48 16.95L11.17 13.97C11.12 13.85 11.21 13.72 11.34 13.72ZM15.57 22.48H11.34C11.21 22.48 11.12 22.35 11.17 22.23L12.3 19.25C12.33 19.18 12.4 19.13 12.48 19.13H15.66C16.62 19.13 17.59 19.81 17.59 20.74C17.59 21.79 16.64 22.48 15.57 22.48Z" fill="#32005F"/><path d="M53.71 17.9C53.71 17.9 55.52 17.32 55.42 14.81C55.32 12.41 53.07 11.4 50.75 11.4H44.12C43.86 11.4 43.67 11.65 43.76 11.89L46.08 17.84L43.75 24.3C43.66 24.54 43.85 24.79 44.11 24.79H51.39C54.63 24.79 56 22.54 56 21.04C56 18.4 53.71 17.9 53.71 17.9V17.9ZM47.07 13.72H50.62C51.68 13.72 52.63 14.41 52.63 15.47C52.63 16.4 51.67 17.08 50.7 17.08H48.39C48.31 17.08 48.24 17.03 48.21 16.95L46.9 13.97C46.85 13.85 46.94 13.72 47.07 13.72ZM51.3 22.48H47.07C46.94 22.48 46.85 22.35 46.9 22.23L48.03 19.25C48.06 19.18 48.13 19.13 48.21 19.13H51.39C52.35 19.13 53.31 19.81 53.31 20.74C53.31 21.79 52.37 22.48 51.3 22.48Z" fill="#32005F"/><path d="M29.92 14.26C30.09 14.13 30 13.87 29.79 13.87H26.74C24.85 13.87 24.18 16.04 24.18 16.04V13.87H21.46V24.8H24.18V18.45C24.18 17.17 25.29 16.79 26.12 16.79H28.08C28.47 15.5 29.32 14.69 29.92 14.26V14.26Z" fill="#32005F"/><path d="M34.21 13.83C30.9 13.83 28.78 16.04 28.78 19.42C28.78 22.49 30.95 24.98 33.93 24.98C36.6 24.98 38.46 23.71 39.09 22.17L36.65 21.37C36.2 22.1 35.28 22.66 34.04 22.66C32.8 22.66 31.78 21.74 31.4 20.45C31.35 20.29 31.48 20.12 31.66 20.12H39.31V18.18C39.31 16.43 37.66 13.83 34.22 13.83L34.21 13.83ZM36.6 18.18H31.72C31.53 18.18 31.4 18.01 31.46 17.84C31.88 16.63 32.86 15.9 34.19 15.9C35.68 15.9 36.56 16.9 36.85 17.84C36.91 18.01 36.78 18.18 36.6 18.18L36.6 18.18Z" fill="#32005F"/><path d="M44.69 17.87C44.69 17.27 44.18 16.78 43.56 16.78H41.6C40.97 16.78 40.47 17.27 40.47 17.87C40.47 18.48 40.97 18.97 41.6 18.97H43.56C44.18 18.97 44.69 18.48 44.69 17.87Z" fill="#32005F"/></svg>`,
+safe:`<svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M33.13 5H6.88C5.84 5 5 5.84 5 6.88V33.13C5 34.16 5.84 35 6.88 35H33.13C34.16 35 35 34.16 35 33.13V6.88C35 5.84 34.16 5 33.13 5Z" fill="url(#gsafe)"/><path d="M32.4 6.67H7.61C7.09 6.67 6.67 7.09 6.67 7.61V32.4C6.67 32.92 7.09 33.34 7.61 33.34H32.4C32.91 33.34 33.33 32.92 33.33 32.4V7.61C33.33 7.09 32.91 6.67 32.4 6.67Z" fill="url(#gsafe)"/><path d="M6.67 11.73H7.54C7.98 11.73 8.33 12.09 8.33 12.53V15.94C8.33 16.38 7.98 16.73 7.54 16.73H6.67V11.73V11.73Z" fill="#879399"/><path d="M6.67 21.73H7.54C7.98 21.73 8.33 22.09 8.33 22.53V25.94C8.33 26.38 7.98 26.74 7.54 26.74H6.67V21.74V21.73Z" fill="#879399"/><path d="M10.16 35H16.5V35.08C16.5 35.96 15.79 36.67 14.92 36.67H11.75C10.87 36.67 10.16 35.96 10.16 35.08V35Z" fill="#879399"/><path d="M23.5 35H29.84V35.08C29.84 35.96 29.13 36.67 28.25 36.67H25.08C24.21 36.67 23.5 35.96 23.5 35.08V35Z" fill="#879399"/><path d="M20 30C25.52 30 30 25.52 30 20C30 14.48 25.52 10 20 10C14.48 10 10 14.48 10 20C10 25.52 14.48 30 20 30Z" fill="white"/><path d="M20 25C22.79 25 25.05 22.74 25.05 19.95C25.05 17.17 22.79 14.91 20 14.91C17.22 14.91 14.96 17.17 14.96 19.95C14.96 22.74 17.22 25 20 25Z" fill="url(#gsafe)"/><path d="M14.15 25.8C13.97 25.63 13.97 25.35 14.15 25.17L15.13 24.19C15.3 24.02 15.59 24.02 15.76 24.19C15.94 24.37 15.94 24.65 15.76 24.82L14.78 25.8C14.6 25.98 14.32 25.98 14.15 25.8Z" fill="#879399"/><path d="M15.13 15.71L14.15 14.73C13.97 14.56 13.97 14.28 14.15 14.1C14.32 13.93 14.6 13.93 14.78 14.1L15.76 15.08C15.94 15.26 15.94 15.54 15.76 15.71C15.59 15.89 15.3 15.89 15.13 15.71Z" fill="#879399"/><path d="M24.24 15.71C24.06 15.54 24.06 15.26 24.24 15.08L25.22 14.1C25.4 13.93 25.68 13.93 25.85 14.1C26.03 14.28 26.03 14.56 25.85 14.73L24.87 15.71C24.7 15.89 24.41 15.89 24.24 15.71Z" fill="#879399"/><path d="M25.22 25.8L24.24 24.82C24.06 24.65 24.06 24.37 24.24 24.19C24.41 24.02 24.7 24.02 24.87 24.19L25.85 25.17C26.03 25.35 26.03 25.63 25.85 25.8C25.68 25.98 25.4 25.98 25.22 25.8Z" fill="#879399"/><defs><linearGradient id="gsafe" x1="20" y1="6.14" x2="20" y2="51.25" gradientUnits="userSpaceOnUse"><stop offset="0.04" stop-color="#879399"/><stop offset="0.15" stop-color="#8C979C"/><stop offset="0.29" stop-color="#9BA3A8"/><stop offset="0.45" stop-color="#B4B8BA"/><stop offset="0.56" stop-color="#CCCCCC"/></linearGradient></defs></svg>`,
+wallet:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4.14 4.93H19.86C20.04 4.93 20.22 4.94 20.41 4.96C20.34 4.53 20.2 4.11 19.97 3.74C19.74 3.37 19.44 3.04 19.09 2.79C18.73 2.53 18.33 2.35 17.9 2.26C17.47 2.16 17.03 2.15 16.6 2.23L3.67 4.44H3.66C2.85 4.6 2.13 5.05 1.64 5.72C2.37 5.21 3.25 4.93 4.14 4.93Z" fill="url(#gwallet)"/><path d="M19.86 6.11H4.14C3.31 6.11 2.51 6.44 1.92 7.03C1.33 7.62 1 8.42 1 9.25V18.68C1 19.51 1.33 20.31 1.92 20.9C2.51 21.49 3.31 21.82 4.14 21.82H19.86C20.69 21.82 21.49 21.49 22.08 20.9C22.67 20.31 23 19.51 23 18.68V9.25C23 8.42 22.67 7.62 22.08 7.03C21.49 6.44 20.69 6.11 19.86 6.11ZM17.52 15.54C17.21 15.54 16.91 15.44 16.65 15.27C16.39 15.1 16.19 14.85 16.07 14.57C15.95 14.28 15.92 13.96 15.98 13.66C16.04 13.35 16.19 13.07 16.41 12.85C16.63 12.63 16.91 12.48 17.22 12.42C17.52 12.36 17.84 12.39 18.13 12.51C18.41 12.63 18.66 12.83 18.83 13.09C19 13.35 19.1 13.65 19.1 13.96C19.1 14.38 18.93 14.78 18.64 15.08C18.34 15.37 17.94 15.54 17.52 15.54Z" fill="url(#gwallet)"/><path d="M1.02 12.56V7.68C1.02 6.61 1.61 4.83 3.66 4.44C5.39 4.12 7.11 4.12 7.11 4.12C7.11 4.12 8.24 4.9 7.31 4.9C6.38 4.9 6.4 6.11 7.31 6.11C8.22 6.11 7.31 7.26 7.31 7.26L3.65 11.41L1.02 12.56Z" fill="url(#gwallet)"/><defs><radialGradient id="gwallet" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1.83 5) rotate(18.3) scale(22.3 22.06)"><stop offset="0.15" stop-color="#FF2947"/><stop offset="0.63" stop-color="#121E6C"/><stop offset="1.00" stop-color="#0407F5"/></radialGradient></defs></svg>`,
+plus:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M15.3 2C16.66 2 17.56 2.47 18.1 3.22C18.62 3.94 18.74 4.83 18.74 5.57V19.64C18.74 20.56 18.47 21.41 17.89 22.03C17.3 22.65 16.45 22.98 15.4 22.98C14.46 22.98 12.72 22.98 11.22 22.98L8.44 22.99L8.44 22.99C7.08 22.99 6.18 22.52 5.64 21.77C5.12 21.05 5 20.16 5 19.42V5.35C5 4.43 5.27 3.58 5.85 2.96C6.44 2.34 7.29 2.01 8.34 2.01C9.28 2.01 11.02 2.01 12.52 2L15.3 2L15.3 2.5V2ZM15.3 3L12.53 3C11.02 3.01 9.28 3.01 8.34 3.01C7.51 3.01 6.94 3.27 6.58 3.65C6.21 4.04 6 4.61 6 5.35V19.42C6 20.08 6.11 20.72 6.45 21.19C6.76 21.62 7.33 21.99 8.44 21.99L11.21 21.98C12.72 21.98 14.46 21.98 15.4 21.98C16.23 21.98 16.8 21.72 17.16 21.34C17.53 20.95 17.74 20.38 17.74 19.64V5.57C17.74 4.91 17.63 4.27 17.29 3.8C16.98 3.37 16.41 3 15.3 3Z" fill="#121E6C"/><path fill-rule="evenodd" d="M7.84 5.71C7.79 5.71 7.75 5.75 7.75 5.8V11.42C7.75 11.47 7.79 11.51 7.84 11.51H15.89C15.94 11.51 15.98 11.47 15.98 11.42V5.8C15.98 5.75 15.94 5.71 15.89 5.71H7.84ZM6.75 5.8C6.75 5.2 7.24 4.71 7.84 4.71H15.89C16.49 4.71 16.98 5.2 16.98 5.8V11.42C16.98 12.02 16.49 12.51 15.89 12.51H7.84C7.24 12.51 6.75 12.02 6.75 11.42V5.8Z" fill="#121E6C"/></svg>`,
+coin:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M12.25 8.15C11.07 8.15 10.19 9.01 10.19 9.96C10.19 10.91 11.07 11.77 12.25 11.77C13.89 11.77 15.31 12.99 15.31 14.58C15.31 16.17 13.89 17.39 12.25 17.39C10.78 17.39 9.5 16.42 9.24 15.06C9.19 14.79 9.36 14.53 9.64 14.48C9.91 14.43 10.17 14.6 10.22 14.88C10.38 15.7 11.2 16.39 12.25 16.39C13.43 16.39 14.31 15.53 14.31 14.58C14.31 13.63 13.43 12.77 12.25 12.77C10.61 12.77 9.19 11.55 9.19 9.96C9.19 8.37 10.61 7.15 12.25 7.15C13.69 7.15 14.95 8.07 15.25 9.39C15.31 9.66 15.14 9.93 14.87 9.99C14.6 10.05 14.33 9.88 14.27 9.61C14.09 8.81 13.29 8.15 12.25 8.15Z" fill="#121E6C"/><path fill-rule="evenodd" d="M12.26 16.39C12.54 16.39 12.76 16.61 12.76 16.89V18.73C12.76 19.01 12.54 19.23 12.26 19.23C11.98 19.23 11.76 19.01 11.76 18.73V16.89C11.76 16.61 11.98 16.39 12.26 16.39Z" fill="#121E6C"/><path fill-rule="evenodd" d="M12.26 5.28C12.54 5.28 12.76 5.5 12.76 5.78V7.47C12.76 7.75 12.54 7.97 12.26 7.97C11.98 7.97 11.76 7.75 11.76 7.47V5.78C11.76 5.5 11.98 5.28 12.26 5.28Z" fill="#121E6C"/><path fill-rule="evenodd" d="M12.26 3C7.15 3 3 7.15 3 12.26C3 17.37 7.15 21.52 12.26 21.52C17.37 21.52 21.52 17.37 21.52 12.26C21.52 7.15 17.37 3 12.26 3ZM2 12.26C2 6.59 6.59 2 12.26 2C17.93 2 22.52 6.59 22.52 12.26C22.52 17.93 17.93 22.52 12.26 22.52C6.59 22.52 2 17.93 2 12.26Z" fill="#121E6C"/></svg>`,
+alert:`<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path fill-rule="evenodd" d="M14 3.41C8.15 3.41 3.41 8.15 3.41 14C3.41 19.85 8.15 24.59 14 24.59C19.85 24.59 24.59 19.85 24.59 14C24.59 8.15 19.85 3.41 14 3.41ZM2.33 14C2.33 7.56 7.56 2.33 14 2.33C20.44 2.33 25.67 7.56 25.67 14C25.67 20.44 20.44 25.67 14 25.67C7.56 25.67 2.33 20.44 2.33 14Z" fill="#121E6C"/><path fill-rule="evenodd" d="M14 7.02C14.3 7.02 14.54 7.26 14.54 7.56V16.15C14.54 16.44 14.3 16.68 14 16.68C13.7 16.68 13.46 16.44 13.46 16.15V7.56C13.46 7.26 13.7 7.02 14 7.02Z" fill="#121E6C"/><path d="M14.75 19.07C14.75 19.5 14.4 19.85 13.97 19.85C13.54 19.85 13.19 19.5 13.19 19.07C13.19 18.64 13.54 18.29 13.97 18.29C14.4 18.29 14.75 18.64 14.75 19.07Z" fill="#121E6C"/></svg>`,
+update:`<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" d="M20.24 9.73C18.9 5.69 14.96 3.27 10.89 3.66C10.61 3.69 10.35 3.47 10.32 3.19C10.29 2.9 10.5 2.64 10.79 2.61C15.33 2.17 19.73 4.88 21.24 9.4C22.68 13.68 21.04 18.25 17.53 20.73L20.42 21.11C20.71 21.15 20.91 21.41 20.87 21.7C20.83 21.99 20.57 22.19 20.28 22.16L15.96 21.58C15.91 21.59 15.86 21.58 15.82 21.57L15.35 21.5L16.01 16.58C16.04 16.29 16.31 16.09 16.6 16.13C16.88 16.16 17.09 16.43 17.05 16.72L16.6 20.09C19.97 17.93 21.57 13.69 20.24 9.73ZM8.15 3.65L7.31 8.54C7.26 8.83 6.99 9.02 6.7 8.97C6.42 8.92 6.22 8.65 6.27 8.36L6.84 5.08C3.52 7.25 1.95 11.46 3.27 15.39C4.63 19.46 8.61 21.89 12.69 21.46C12.98 21.43 13.24 21.64 13.27 21.93C13.3 22.22 13.09 22.48 12.8 22.51C8.24 22.99 3.79 20.27 2.27 15.73C0.83 11.42 2.48 6.82 6.03 4.35L3.08 3.84C2.79 3.79 2.6 3.52 2.65 3.23C2.7 2.95 2.97 2.76 3.26 2.81L7.53 3.55C7.6 3.55 7.66 3.56 7.72 3.58L8.15 3.65Z" fill="#FF2947"/></svg>`,
+status:`<svg width="393" height="66" viewBox="0 0 393 66" fill="none"><path d="M32.18 38.1C34.69 38.1 36.21 35.96 36.21 32.55V32.54C36.21 29.12 34.69 27 32.18 27C29.66 27 28.16 29.12 28.16 32.54V32.55C28.16 35.96 29.66 38.1 32.18 38.1ZM32.18 36.57C30.83 36.57 30.06 35.06 30.06 32.55V32.54C30.06 30.03 30.83 28.54 32.18 28.54C33.52 28.54 34.31 30.03 34.31 32.54V32.55C34.31 35.06 33.52 36.57 32.18 36.57Z" fill="white"/><path d="M41.86 27C39.57 27 37.93 28.57 37.93 30.71V30.73C37.93 32.73 39.35 34.21 41.38 34.21C42.83 34.21 43.76 33.47 44.14 32.64H44.29C44.29 32.72 44.28 32.8 44.28 32.88C44.2 34.9 43.49 36.54 41.81 36.54C40.88 36.54 40.23 36.06 39.95 35.32L39.93 35.25H38.07L38.09 35.33C38.42 36.95 39.87 38.1 41.81 38.1C44.47 38.1 46.08 35.99 46.08 32.43V32.41C46.08 28.6 44.11 27 41.86 27ZM41.85 32.76C40.65 32.76 39.78 31.89 39.78 30.66V30.65C39.78 29.47 40.71 28.54 41.87 28.54C43.04 28.54 43.96 29.48 43.96 30.69V30.71C43.96 31.9 43.04 32.76 41.85 32.76Z" fill="white"/><path d="M49.23 30.98C49.91 30.98 50.4 30.47 50.4 29.83C50.4 29.18 49.91 28.67 49.23 28.67C48.57 28.67 48.07 29.18 48.07 29.83C48.07 30.47 48.57 30.98 49.23 30.98ZM49.23 36.42C49.91 36.42 50.4 35.91 50.4 35.26C50.4 34.61 49.91 34.1 49.23 34.1C48.57 34.1 48.07 34.61 48.07 35.26C48.07 35.91 48.57 36.42 49.23 36.42Z" fill="white"/><path d="M57.51 37.83H59.32V35.8H60.74V34.24H59.32V27.26H56.65C55.21 29.45 53.71 31.88 52.34 34.26V35.8H57.51V37.83ZM54.1 34.29V34.18C55.13 32.38 56.35 30.43 57.43 28.77H57.54V34.29H54.1Z" fill="white"/><path d="M64.95 37.83H66.84V27.26H64.96L62.2 29.2V30.98L64.83 29.12H64.95V37.83Z" fill="white"/><path d="M317.64 34.05H318.64C319.19 34.05 319.64 34.5 319.64 35.05V37.05C319.64 37.6 319.19 38.05 318.64 38.05H317.64C317.09 38.05 316.64 37.6 316.64 37.05V35.05C316.64 34.5 317.09 34.05 317.64 34.05Z" fill="white"/><path d="M322.14 32.05H323.14C323.69 32.05 324.14 32.5 324.14 33.05V37.05C324.14 37.6 323.69 38.05 323.14 38.05H322.14C321.59 38.05 321.14 37.6 321.14 37.05V33.05C321.14 32.5 321.59 32.05 322.14 32.05Z" fill="white"/><path d="M326.64 30.05H327.64C328.19 30.05 328.64 30.48 328.64 31.01V37.09C328.64 37.62 328.19 38.05 327.64 38.05H326.64C326.09 38.05 325.64 37.62 325.64 37.09V31.01C325.64 30.48 326.09 30.05 326.64 30.05Z" fill="white"/><path d="M331.14 27.05H332.14C332.69 27.05 333.14 27.51 333.14 28.08V37.02C333.14 37.59 332.69 38.05 332.14 38.05H331.14C330.59 38.05 330.14 37.59 330.14 37.02V28.08C330.14 27.51 330.59 27.05 331.14 27.05V27.05Z" fill="white" fill-opacity="0.2"/><path d="M343.47 35.47C344.72 34.39 346.56 34.39 347.81 35.47C347.87 35.53 347.91 35.62 347.91 35.7C347.92 35.79 347.88 35.87 347.82 35.93L345.86 37.96C345.8 38.01 345.72 38.05 345.64 38.05C345.56 38.05 345.48 38.01 345.42 37.96L343.46 35.93C343.4 35.87 343.37 35.79 343.37 35.7C343.37 35.62 343.41 35.53 343.47 35.47ZM340.85 32.78C343.55 30.21 347.73 30.21 350.43 32.78C350.49 32.84 350.53 32.92 350.53 33.01C350.53 33.09 350.5 33.18 350.44 33.24L349.3 34.41C349.19 34.53 349 34.53 348.88 34.41C347.99 33.59 346.84 33.14 345.64 33.14C344.45 33.14 343.29 33.59 342.41 34.41C342.29 34.53 342.1 34.53 341.98 34.41L340.85 33.24C340.79 33.18 340.76 33.09 340.76 33.01C340.76 32.92 340.79 32.84 340.85 32.78ZM338.24 30.09C342.38 26.04 348.91 26.04 353.05 30.09C353.11 30.15 353.14 30.23 353.14 30.32C353.14 30.4 353.11 30.48 353.05 30.55L351.91 31.71C351.8 31.83 351.61 31.84 351.49 31.72C349.91 30.19 347.82 29.33 345.64 29.33C343.46 29.33 341.37 30.19 339.79 31.72C339.68 31.84 339.49 31.84 339.37 31.71L338.23 30.55C338.17 30.48 338.14 30.4 338.14 30.32C338.14 30.23 338.18 30.15 338.24 30.09Z" fill="white"/><rect x="358.64" y="27.05" width="21.61" height="11" rx="2.17" stroke="white" stroke-opacity="0.6"/><path d="M381.77 30.43V34.67C382.6 34.31 383.14 33.47 383.14 32.55C383.14 31.62 382.6 30.79 381.77 30.43Z" fill="white" fill-opacity="0.6"/><rect x="360.2" y="28.67" width="18.5" height="7.76" rx="1.33" fill="white"/></svg>`
+};
+let uid=0;
+const ic=n=>{const u=++uid;return ICONS[n].replace(/(id="|url\(#)(g[a-z]+)/g,(m,a,b)=>a+b+u)};
+
+/* ---------- Bloques de pantalla ---------- */
+const sk=(w,h,r)=>`<i class="sk" style="width:${w}px;height:${h}px;border-radius:${r}px"></i>`;
+const skw=(w,h,r)=>`<i class="skw" style="width:${w}px;height:${h}px;border-radius:${r}px"></i>`;
+const head=(t,more)=>`<div class="sh"><h3>${t}</h3>${more?'<button class="more" type="button">Ver más</button>':''}</div>`;
+const HIST=[['arrowDown','Maria José Suárez','$100.000','Transferencia recibida',0],['arrowUp','Eduardo Mejía','-$100.000','Transferencia enviada',1],['arrowDown','Maria José Suárez','$100.000','Transferencia recibida',0]];
+const PROD=[['savings','Bolsillos','Tu dinero crece al 9.5% E.A.','Abrir'],['yield','CDT','Rentabilidad hasta 12,0% E.A.','Abrir'],['filter','Elimina tus topes','Cambia a depósito ordinario','Cambiar'],['debit','Tarjeta de crédito','Tienes un cupo preaprobado','Activar']];
+const ERR={mov:{n:'movimientos',h:220},prod:{n:'más opciones',h:256},breb:{n:'Bre-B',h:140}};
+const histRows=()=>HIST.map(([i,n,v,t,neg])=>`<div class="hc">${ic(i)}<div class="hi"><div class="hr2"><b>${n}</b><b class="${neg?'neg':''}">${v}</b></div><span class="lbl">${t}</span></div></div>`).join('');
+const prodRows=()=>PROD.map(([i,t,d,c])=>`<div class="prow">${ic(i)}<div class="ptx"><b>${t}</b><span class="lbl">${d}</span></div><button class="abtn" type="button" tabindex="-1">${c}</button></div>`).join('');
+const errCard=m=>`<div class="errflat" role="group" aria-label="Error al cargar ${ERR[m].n}"><button class="cbtn" type="button" data-retry="${m}" aria-label="Reintentar cargar ${ERR[m].n}">${ic('update')}</button><p class="cmsg">Hubo un error al cargar esta sección</p></div>`;
+
+function modInner(m,s){
+  if(m==='dash') return s==='skeleton'
+    ? `<div class="dash"><div class="search">${sk(127,44,100)}<div class="addbtn"></div></div><div class="dtext skt"><div style="height:20px;display:flex;align-items:center">${sk(145,16,16)}</div><div class="bal2">${sk(321,52,40)}${ic('view')}</div></div></div>`
+    : `<div class="dash"><div class="search"><div class="pill"><span>****0099</span>${ic('chevDown')}</div><div class="addbtn">${ic('menu')}</div></div><div class="dtext"><span class="lbl">Depósito Ordinario</span><div class="bal"><b>$500.400.000</b>${ic('view')}</div></div></div>`;
+  if(m==='carr') return s==='skeleton' ? '' : `<div class="carr"><div class="cic">${ic('safe')}<b class="dot"></b></div><div class="cinfo"><span class="t16">Ya validamos tu información</span><span class="lbl">Ahora puedes crear tu CDT</span></div></div>`;
+  if(m==='acts'){
+    if(s==='skeleton') return `<div class="acts l">${[0,1,2,3].map(()=>`<div class="act">${sk(84.4,68,16)}<div class="lsk">${sk(70,14,14)}${sk(46,14,14)}</div></div>`).join('')}</div>`;
+    const A=[['send','Transferir'],['scan','Escanear<br>QR'],['withdrawal','Retirar'],['charge','Depositar'],[null,'Pagar<br>facturas']];
+    return `<div class="acts l">${A.map(([i,l])=>`<div class="act"><div class="box">${i?ic(i):''}</div><span>${l}</span></div>`).join('')}</div>`;
+  }
+  if(m==='breb'&&s==='error') return `<div class="breb onerr">${errCard('breb')}</div>`;
+  if(m==='breb') return s==='skeleton'
+    ? `<div class="breb"><div class="bh">${skw(64,24,12)}${skw(150,20,10)}</div><div class="brow">${[0,1,2].map(()=>`<div class="bt">${skw(107,44,16)}${skw(64,16,8)}</div>`).join('')}</div></div>`
+    : `<div class="breb"><div class="bh">${ic('breb')}<div class="bid"><span>Llave: @3121234323</span>${ic('chevRight')}</div></div><div class="brow">${[['qr','Escanear/ Leer'],['copy','Copiar'],['send','Transferir']].map(([i,l])=>`<div class="bt"><div class="box">${ic(i)}</div><span>${l}</span></div>`).join('')}</div></div>`;
+  if(m==='mov'){
+    if(s==='error') return head('Movimientos',false)+errCard('mov');
+    if(s==='skeleton') return head('Movimientos',true)+`<div class="hlist">${[0,1,2].map(()=>`<div class="hc">${sk(24,24,8)}<div class="hi"><div class="hr">${sk(225,20,16)}${sk(88,20,16)}</div>${sk(187,20,16)}</div></div>`).join('')}</div>`;
+    return head('Movimientos',true)+`<div class="hlist">${HIST.map(([i,n,v,t,neg])=>`<div class="hc">${ic(i)}<div class="hi"><div class="hr2"><b>${n}</b><b class="${neg?'neg':''}">${v}</b></div><span class="lbl">${t}</span></div></div>`).join('')}</div>`;
+  }
+  if(m==='prod'){
+    if(s==='error') return head('Más opciones para ti',false)+errCard('prod');
+    if(s==='skeleton') return head('Más opciones para ti',true)+`<div class="plist">${[0,1,2,3].map(()=>`<div class="prow skr">${sk(24,24,8)}<div class="ptx" style="flex:1;min-width:0">${sk(85,20,16)}${sk(187,20,16)}</div><span style="margin-left:auto">${sk(88,36,35)}</span></div>`).join('')}</div>`;
+    return head('Más opciones para ti',true)+`<div class="plist">${PROD.map(([i,t,d,c])=>`<div class="prow">${ic(i)}<div class="ptx"><b>${t}</b><span class="lbl">${d}</span></div><button class="abtn" type="button">${c}</button></div>`).join('')}</div>`;
+  }
+  return '';
+}
+const ORDER=['dash','carr','acts','breb','mov','prod'];
+
+function fxHTML(){
+  const u=++uid;
+  return `<div class="fx"><svg width="393" height="300" viewBox="0 0 393 300"><defs><linearGradient id="hg${u}" gradientUnits="userSpaceOnUse" x1="-206.7" y1="0" x2="509" y2="0"><stop offset="0.022" stop-color="#0407F5"/><stop offset="0.449" stop-color="#121E6C"/><stop offset="0.824" stop-color="#FF013E"/></linearGradient><filter id="hb${u}" filterUnits="userSpaceOnUse" x="-700" y="-700" width="1800" height="1800"><feGaussianBlur stdDeviation="60"/></filter><mask id="hm${u}" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="2400" height="2400"><rect x="-1000" y="-1000" width="2400" height="2400" fill="#fff"/><ellipse cx="197.13" cy="338.02" rx="459.5" ry="216.78" fill="#000"/></mask></defs><g filter="url(#hb${u})"><ellipse cx="197.13" cy="338.02" rx="459.5" ry="216.78" fill="none" stroke="url(#hg${u})" stroke-width="472" mask="url(#hm${u})"/></g></svg></div>`;
+}
+const hdrHTML=()=>`<div class="stat">${ICONS.status}</div><div class="hh"><div class="who"><div class="nm"><b>José Vélez</b><span>Personal</span></div><span class="chv">${ic('chevHdr')}</span></div><div class="hb">${['key','bell','people'].map(i=>`<span class="hbtn">${ic(i)}</span>`).join('')}</div></div>`;
+const tabsHTML=()=>`<div class="tabs"><span class="tab on"><span class="ti">Tu dinero</span></span><span class="tab">Tarjetas</span><span class="tab last">Bolsillos</span></div>`;
+const navHTML=(c='Cuenta')=>`<div class="nav"><div class="nbar">${[['wallet',c,1],['plus','Ventas',0],['coin','Crédito',0],['yield','Inversión',0]].map(([i,l,a])=>`<div class="ni${a?' on':''}">${ic(i)}<span>${l}</span></div>`).join('')}</div></div>`;
+function screenHTML(states,{nav=true,pb=158.5}={}){
+  return `<div class="scr" style="padding-bottom:${pb}px">${fxHTML()}${hdrHTML()}<div class="body">${tabsHTML()}${ORDER.map(m=>`<section class="mod" data-m="${m}" data-state="${states[m]}">${modInner(m,states[m])}</section>`).join('')}</div>${nav?navHTML():''}</div>`;
+}
+const allS=s=>Object.fromEntries(ORDER.map(m=>[m,s]));
+
+
+/* ---------- Guía ---------- */
+const $=id=>document.getElementById(id);
+const FIG='https://www.figma.com/design/7JBlk7qLM6FCUPyKX6gqVM/Super-app-2.0?node-id=';
+const AREAS=[['empezar','Empezar'],['fundamentos','Fundamentos'],['estados','Estados'],['patrones','Patrones'],['impl','Implementación']];
+const AINFO={empezar:'Qué es esta guía y qué se decidió.',fundamentos:'Reglas que valen para toda la app.',estados:'Cada caso con su ejemplo visual.',patrones:'Cómo se combinan los estados.',impl:'Para diseño y desarrollo.'};
+const ST={A:['Acordado','ok'],P:['Propuesto','info'],D:['Por definir','bad']};
+const tag=s=>s?`<span class="tag ${ST[s][1]}">${ST[s][0]}</span>`:'';
+const stub=(id,a,t,st,s,c)=>({id,a,t,st,s,k:'stub',c});
+const PG=[
+ {id:'decisiones',a:'empezar',t:'Registro de decisiones',k:'dec',s:'Qué está acordado, propuesto y por definir.'},
+ {id:'principios',a:'fundamentos',t:'Principios',st:'A',k:'prin',s:'Siete reglas que guían todos los casos.'},
+ {id:'tiempos',a:'fundamentos',t:'Tiempos',st:'D',k:'time',s:'Cuándo se ve el skeleton, cuándo es lento y cuándo es error.'},
+ {id:'layout',a:'fundamentos',t:'Sin saltos de layout',st:'A',k:'lay',s:'El skeleton mide lo mismo que el contenido.'},
+ {id:'animacion',a:'fundamentos',t:'Animación',st:'D',k:'anim',s:'Una sola animación para toda la app.'},
+ {id:'skeleton',a:'estados',t:'Skeleton de carga',st:'A',k:'phone',s:'Cada módulo muestra su forma mientras carga.',
+  ph:{states:allS('skeleton'),pb:158.5},
+  pins:[['.tabs, .nav',1,'Tabs y navegación'],['[data-m=dash]',2,'Skeleton con la forma del contenido'],['[data-m=mov]',3,'Título visible desde el inicio'],['[data-m=prod]',4,'Cada módulo se resuelve solo']],
+  specs:[['Todos','Elementos con skeleton','Todo elemento que depende de datos usa skeleton; no hay spinners sueltos en los módulos.'],['Por módulo','Resolución independiente','Cada módulo cambia a su contenido cuando responde su servicio, sin esperar a los demás.'],['Desde el inicio','Títulos de sección','Se ven de inmediato en los módulos con título propio, como Movimientos.'],['Mismo alto','Tamaño del skeleton','Debe medir lo mismo que el contenido final para que nada se mueva al cargar.'],['Por definir','Animación','Falta elegir entre pulso y barrido y unificarla en toda la app.']],
+  dec:[['A','Skeleton en todos los elementos, sin spinners sueltos'],['A','Cada módulo carga por separado'],['A','Títulos desde el inicio en módulos con título propio'],['D','Cuándo aparece el skeleton (umbral)']],
+  fig:'5683-35484',rel:['tiempos','layout','animacion']},
+ {id:'contenido',a:'estados',t:'Contenido cargado',st:'A',k:'phone',play:true,s:'Cada módulo aparece al llegar su respuesta.',
+  ph:{states:allS('loaded'),pb:158.5},
+  pins:[['[data-m=dash]',1,'Datos reales por módulo'],['[data-m=carr]',2,'Módulo que solo algunos ven: el aviso «Ya validamos tu información»'],['[data-m=mov]',3,'Mismo orden que el skeleton'],['[data-m=prod]',4,'Sin recargar toda la pantalla']],
+  specs:[['Por módulo','Aparición','Cada módulo muestra su contenido apenas llega su respuesta.'],['200 ms*','Transición','Cambio suave del skeleton al contenido; valor del prototipo, por validar.'],['Mismo orden','Estructura','El contenido conserva el orden y la posición que tenía el skeleton.'],['Sin skeleton','Al refrescar','Con pull-to-refresh se conserva el contenido y se usa el indicador nativo (propuesto).']],
+  dec:[['A','Cargas progresivas, sin loaders de pantalla completa'],['P','Pull-to-refresh nativo, sin skeleton sobre contenido'],['A','Lo que ya está listo se puede usar mientras carga']],
+  fig:'5683-35767',rel:['skeleton','casos']},
+ {id:'casos',a:'fallar',t:'Casos de error',st:'P',k:'cases',s:'Elige un caso y pruébalo en el home completo: carga, error, reintento y pull-to-refresh.'},
+ stub('carga-lenta','estados','Carga lenta','D','Qué se muestra cuando tarda más de lo esperado.',['Umbral','Mensaje','Cuándo pasa a error']),
+ stub('sin-conexion','estados','Sin conexión','P','Estado propio, distinto a «cargando».',['Aviso global','Datos previos','Reintento']),
+ stub('actualizacion','estados','Actualización','P','Pull-to-refresh con indicador nativo.',['Indicador nativo','Sin skeleton','Aviso si falla']),
+ {id:'progresivas',a:'llegar',t:'Cargas progresivas',st:'P',k:'prog',s:'Los servicios cargan por etapas y cada módulo aparece cuando llega su respuesta.'},
+ stub('imagenes','patrones','Imágenes e íconos','P','Placeholder mientras carga y fallback si falla.',['Placeholder','Fallback','Tamaño reservado']),
+ {id:'controles',a:'patrones',t:'Botones y listas',st:'P',k:'btn',s:'Loader dentro del botón y scroll infinito.'},
+ {id:'orden',a:'impl',t:'Orden de carga por producto',st:'D',k:'order',s:'Qué servicio carga primero en cada producto.'},
+ {id:'checklist',a:'construir',t:'Checklist para desarrollo',st:'D',k:'chk',s:'La base de lo que el equipo debe recopilar al construir un skeleton.'},
+ {id:'referentes',a:'impl',t:'Referentes',k:'refs',s:'Fuentes que respaldan la guía.'}
+];
+const FLOWS=[
+ ['Navegación inicial',{stages:[[['Servicio de verticales',['Barra de navegación','Verticales del usuario'],'Bloquea la navegación','P']]],note:'Tras autenticar se muestra el skeleton con los títulos de la sección (acordado).'}],
+ ['Banking',{stages:[
+  [['Lista de depósitos',['Depósito por defecto'],'Error general con reintento','A']],
+  [['Información del depósito',['Saldo','Accesos rápidos'],'Error crítico a pantalla completa con reintento','P'],['Movimientos',['Movimientos'],'Error en el módulo con «Reintentar»','P'],['Bre-B',['Bre-B'],'Por definir','D']]],
+  free:['Más opciones para ti'],
+  steps:['<b>Entrar a la pantalla.</b> Se muestra de inmediato el skeleton con los títulos de cada módulo. «Más opciones para ti» no depende de un servicio y es lo primero en aparecer.','<b>Lista de depósitos.</b> Es lo primero que se consulta: sin ella no se puede armar nada. Se toma el primer depósito por defecto y se guarda su ID. Si falla, error crítico a pantalla completa con reintento.','<b>Con el ID, tres servicios en paralelo.</b> Información del depósito (saldo y accesos rápidos), Movimientos y Bre-B. Cada módulo aparece apenas responde su servicio, sin esperar a los demás.','<b>Si algo falla.</b> Si falla la información del depósito, error crítico. Si fallan Movimientos o Bre-B, el aviso queda solo en ese módulo, con reintento. El resto sigue usable.','<b>Cargas siguientes.</b> Con el ID del depósito guardado en el dispositivo (hoy en Android) se omite la lista de depósitos y se lanzan directo los tres servicios.','<b>Por definir.</b> Si el saldo tiene prioridad sobre los movimientos, y si el carrusel y Bre-B arrancan con el resto o después.'],
+  note:'Con el ID del depósito guardado en el dispositivo, las cargas siguientes pueden saltarse la etapa 1 (hoy en Android). La prioridad entre saldo y movimientos está por definir.'}],
+ ['Pagos',{empty:true,items:['Pagos']}],
+ ['Otras verticales',{empty:true,items:['Ventas','Crédito','Inversión']}]];
+function flowHTML(f){
+  if(f.empty) return f.items.map(n=>`<div class="oblk"><h3>${n}</h3><div class="flow">${[1,2,3].map(i=>`<div class="stage"><div class="sh2"><span class="pn">${i}</span>Etapa ${i}</div><div class="svc empty">Por documentar</div></div>`).join('')}</div></div>`).join('');
+  return `<div class="flow">${f.stages.map((st,i)=>`${i?'<span class="fa">→</span>':''}<div class="stage"><div class="sh2"><span class="pn">${i+1}</span>Etapa ${i+1}${st.length>1?' · en paralelo':''}</div>${st.map(([n,fd,fl,s])=>`<div class="svc"><h3>${n}</h3><div class="chips" style="margin-top:8px">${fd.map(x=>`<span class="tag neutral">${x}</span>`).join('')}</div><p class="fl"><b>Si falla:</b> ${fl}</p><div class="cf">${tag(s)}</div></div>`).join('')}</div>`).join('')}</div>`+
+  (f.free?`<div class="ofree">Sin servicio propio:${f.free.map(x=>`<span class="tag neutral">${x}</span>`).join('')}</div>`:'')+
+  (f.steps?`<h2 style="margin:26px 0 12px">Paso a paso</h2><ol class="osteps">${f.steps.map((t,i)=>`<li><span class="pn">${i+1}</span><div>${t}</div></li>`).join('')}</ol>`:'')+
+  (f.note?`<div class="note"><b>!</b> ${f.note}</div>`:'');
+}
+const CKG=[
+ ['Por cada servicio',[['Servicio y módulo que alimenta','El nombre del servicio y qué módulos de la pantalla llena.'],['Dependencias y etapa','De qué servicio o dato depende (por ejemplo, un ID) y en qué etapa carga.'],['Paralelismo','Si puede cargar al mismo tiempo que otros servicios.'],['Prioridad','Qué es crítico para armar la pantalla y qué puede esperar.']]],
+ ['Cuando falla',[['Tipo de falla','Crítica (pantalla completa) o solo del módulo.'],['Reintento','Manual, automático y cuántos intentos.']]],
+ ['Tiempos',[['Promedio y percentil alto','Pedir p90 o p99, no solo el promedio.'],['Tiempo máximo de espera','Hasta cuándo se espera antes de mostrar el error.']]],
+ ['Precarga y estados',[['Qué se puede guardar o precargar','Datos que evitan una etapa en las cargas siguientes.'],['Características del módulo','Si tiene título propio, si es condicional o si puede venir vacío.']]],
+ ['Escenarios de prueba',[['Casos a probar','Tipos de usuario, sin conexión, red lenta y tiempo agotado.']]]];
+function chkHTML(p){
+  return phead(p)+`<div class="pnl"><div class="sech" style="margin-bottom:6px"><h2 style="margin:0">Qué recopilar</h2><span class="tag neutral ckcount">0 completados</span></div><p class="ssum" style="margin:0 0 14px">Por cada servicio, antes de construir un skeleton.</p><div class="pbar"><i class="pfill"></i></div><div class="ckgrid">${CKG.map(([g,its],gi)=>`<div class="ckg"><div class="gh2"><span class="pn">${gi+1}</span><h3>${g}</h3></div>${its.map(([t,h])=>`<label class="ck"><input type="checkbox"><div><b>${t}</b><small>${h}</small></div></label>`).join('')}</div>`).join('')}</div></div>`;
+}
+const REFS=[['Apple HIG · Loading','https://developer.apple.com/design/human-interface-guidelines/loading','Mostrar algo de inmediato y dejar hacer otras cosas.'],
+ ['NN/g · Skeleton Screens 101','https://www.nngroup.com/articles/skeleton-screens/','Cuándo usar skeleton, spinner o barra de progreso.'],
+ ['NN/g · Response Times','https://www.nngroup.com/articles/response-times-3-important-limits/','Los límites de 0,1, 1 y 10 segundos.'],
+ ['Tim Kadlec · Effective Skeleton Screens','https://timkadlec.com/remembers/2020/11/skeleton-screens/','Progreso incremental y expectativas que coinciden.'],
+ ['Carbon · Loading','https://www.carbondesignsystem.com/building-blocks/core/patterns/loading','Skeleton por contenedor y carga progresiva.'],
+ ['Uber Base','https://base.uber.com/6d2425e9f/p/556814-components/b/2386f2','Estructura de navegación y plantilla de páginas.']];
+const DEC=[
+ ['A','Cargas progresivas y skeletons; sin loaders de pantalla completa','Reunión 29-oct'],
+ ['A','Un skeleton por componente independiente','Reunión 29-oct'],
+ ['A','Componente estándar de error y recarga por módulo','Reunión 29-oct'],
+ ['A','Skeleton en todos los elementos, sin spinners en módulos sueltos','Equipo'],
+ ['A','Cada módulo carga por separado, con alternativa si su servicio falla','Equipo'],
+ ['A','Títulos desde el inicio, solo en módulos con título propio','Equipo'],
+ ['A','Lo precargable o sin error se puede usar mientras carga','Equipo'],
+ ['A','Sin saltos de layout: skeleton con el mismo alto que el contenido','Equipo'],
+ ['A','Probar la guía con usuarios','Equipo'],
+ ['A','Error general si falla el servicio de depósitos','Reunión 20-oct'],
+ ['A','Unificar la animación de los skeletons','Reunión 20-oct'],
+ ['P','Pull-to-refresh nativo, sin skeleton sobre contenido existente','Propuesta'],
+ ['P','Loader dentro del botón que además lo bloquea','Propuesta'],
+ ['P','Scroll infinito con loader pequeño al final','Propuesta'],
+ ['P','Placeholder y fallback de imágenes','Propuesta'],
+ ['P','Sin conexión como estado propio','Propuesta'],
+ ['D','Umbral de 3 s: qué mide (skeleton, lento o error)','Pendiente'],
+ ['D','Reintento automático y máximo de reintentos','Pendiente'],
+ ['D','Animación elegida: pulso o barrido','Pendiente'],
+ ['A','Módulos que solo algunos ven: el skeleton hace una transición al tamaño del contenido, solo durante la carga','Equipo'],
+ ['A','Diseño del error por módulo: ícono de actualización y mensaje','Equipo'],
+ ['D','Toast o pantalla completa','Pendiente'],
+ ['D','Estado vacío o sección oculta','Pendiente'],
+ ['D','Corregir alturas del skeleton en Figma','Pendiente'],
+ ['D','Medir tiempos de respuesta y de carga','Pendiente'],
+ ['P','Banking: lista de depósitos → información del depósito → movimientos y Bre-B','Desarrollo'],
+ ['D','Prioridad de carga entre saldo y movimientos','Pendiente'],
+ ['D','Orden de carga de Pagos y de las otras verticales','Pendiente'],
+ ['P','Error crítico: pantalla completa cuando falla la información del depósito','Equipo'],
+ ['D','Texto del mensaje del error crítico','Pendiente'],
+ ['D','Diseño del error de Bre-B','Pendiente']];
+
+const TH={idea:'<circle cx="22" cy="22" r="7" opacity=".5"/><rect x="36" y="18" width="64" height="8" rx="4" opacity=".3"/><circle cx="22" cy="42" r="7" opacity=".5"/><rect x="36" y="38" width="52" height="8" rx="4" opacity=".3"/><circle cx="22" cy="62" r="7" opacity=".5"/><rect x="36" y="58" width="58" height="8" rx="4" opacity=".3"/>',
+ time:'<rect x="14" y="40" width="92" height="6" rx="3" opacity=".3"/><circle cx="26" cy="43" r="6" opacity=".6"/><circle cx="60" cy="43" r="6" opacity=".6"/><circle cx="94" cy="43" r="6" fill="#FF2947"/><rect x="18" y="20" width="16" height="8" rx="4" opacity=".3"/><rect x="52" y="20" width="16" height="8" rx="4" opacity=".3"/><rect x="86" y="20" width="16" height="8" rx="4" opacity=".3"/>',
+ anim:'<rect x="14" y="18" width="92" height="12" rx="6" opacity=".25"/><rect x="14" y="38" width="70" height="12" rx="6" opacity=".25"/><rect x="14" y="58" width="82" height="12" rx="6" opacity=".25"/><rect x="48" y="12" width="22" height="64" rx="11" fill="#fff" opacity=".55"/>',
+ lay:'<rect x="16" y="12" width="40" height="22" rx="6" opacity=".3"/><rect x="64" y="12" width="40" height="22" rx="6" opacity=".3"/><path d="M10 48H110" stroke-dasharray="5 4" stroke-width="2" fill="none" style="stroke:currentColor"/><rect x="16" y="56" width="40" height="14" rx="7" fill="#FF2947" opacity=".9"/><rect x="64" y="56" width="40" height="14" rx="7" fill="#FF2947" opacity=".9"/>',
+ steps:'<rect x="14" y="24" width="26" height="38" rx="7" opacity=".2"/><rect x="47" y="24" width="26" height="38" rx="7" opacity=".45"/><rect x="80" y="24" width="26" height="38" rx="7" opacity=".75"/>',
+ img:'<rect x="22" y="14" width="76" height="54" rx="10" opacity=".25"/><circle cx="44" cy="32" r="7" opacity=".5"/><path d="M26 62l22-18 16 12 12-8 16 14z" opacity=".5"/>',
+ play:'<rect x="16" y="14" width="88" height="56" rx="12" opacity=".2"/><path d="M52 28l26 14-26 14z" fill="#FF2947"/>',
+ btn:'<rect x="20" y="28" width="80" height="28" rx="14" fill="#FF2947" opacity=".9"/><circle cx="48" cy="42" r="3.5" fill="#fff"/><circle cx="60" cy="42" r="3.5" fill="#fff"/><circle cx="72" cy="42" r="3.5" fill="#fff"/>',
+ flow:'<rect x="10" y="30" width="26" height="24" rx="8" opacity=".5"/><rect x="47" y="12" width="26" height="24" rx="8" opacity=".3"/><rect x="47" y="48" width="26" height="24" rx="8" opacity=".3"/><rect x="84" y="30" width="26" height="24" rx="8" opacity=".5"/><path d="M36 42h11M73 24h11v18M73 60h11V42" fill="none" stroke-width="2.5" stroke-linecap="round" style="stroke:currentColor" opacity=".6"/>',
+ check:'<rect x="16" y="14" width="14" height="14" rx="4" opacity=".6"/><rect x="38" y="17" width="64" height="8" rx="4" opacity=".25"/><rect x="16" y="36" width="14" height="14" rx="4" opacity=".6"/><rect x="38" y="39" width="50" height="8" rx="4" opacity=".25"/><rect x="16" y="58" width="14" height="14" rx="4" opacity=".6"/><rect x="38" y="61" width="58" height="8" rx="4" opacity=".25"/>',
+ list:'<rect x="14" y="14" width="30" height="12" rx="6" fill="#1B8959" opacity=".75"/><rect x="52" y="16" width="54" height="8" rx="4" opacity=".25"/><rect x="14" y="36" width="30" height="12" rx="6" fill="#0A53A5" opacity=".75"/><rect x="52" y="38" width="46" height="8" rx="4" opacity=".25"/><rect x="14" y="58" width="30" height="12" rx="6" fill="#EE424E" opacity=".75"/><rect x="52" y="60" width="58" height="8" rx="4" opacity=".25"/>',
+ refs:'<rect x="18" y="22" width="48" height="34" rx="10" fill="none" stroke-width="3" style="stroke:currentColor" opacity=".6"/><rect x="54" y="30" width="48" height="34" rx="10" fill="none" stroke-width="3" style="stroke:currentColor"/>',
+ err2:'<rect x="30" y="12" width="50" height="9" rx="4.5" opacity=".4"/><circle cx="60" cy="44" r="15" fill="#FFF2F4"/><path d="M66 38a8.5 8.5 0 1 0 2 9" fill="none" stroke="#FF2947" stroke-width="2.6" stroke-linecap="round"/><path d="M68 33v6h-6" fill="none" stroke="#FF2947" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="34" y="68" width="52" height="6" rx="3" opacity=".3"/>',
+ crit:'<rect x="36" y="6" width="48" height="72" rx="10" opacity=".14"/><circle cx="60" cy="34" r="10" fill="#FFF2F4"/><path d="M65 30a6 6 0 1 0 1.5 6.5" fill="none" stroke="#FF2947" stroke-width="2.4" stroke-linecap="round"/><rect x="46" y="50" width="28" height="5" rx="2.5" opacity=".4"/><rect x="50" y="58" width="20" height="5" rx="2.5" opacity=".3"/>',
+ sk:'<rect x="14" y="12" width="60" height="10" rx="5" opacity=".35"/><rect x="14" y="30" width="92" height="16" rx="8" opacity=".25"/><rect x="14" y="54" width="42" height="22" rx="8" opacity=".25"/><rect x="64" y="54" width="42" height="22" rx="8" opacity=".25"/>',
+ ok:'<rect x="14" y="12" width="60" height="10" rx="5" opacity=".8"/><rect x="14" y="30" width="92" height="16" rx="8" opacity=".5"/><rect x="14" y="54" width="42" height="22" rx="8" opacity=".5"/><rect x="64" y="54" width="42" height="22" rx="8" opacity=".5"/><circle cx="104" cy="14" r="4" fill="#FF2947"/>',
+ err:'<rect x="10" y="10" width="100" height="64" rx="12" opacity=".15"/><circle cx="60" cy="30" r="10" fill="none" stroke="#121E6C" stroke-width="2.5" style="stroke:currentColor"/><rect x="42" y="50" width="36" height="14" rx="7" fill="#FF2947" opacity=".9"/>',
+ slow:'<rect x="14" y="14" width="60" height="10" rx="5" opacity=".3"/><rect x="14" y="34" width="60" height="30" rx="8" opacity=".25"/><circle cx="92" cy="50" r="14" fill="none" stroke-width="2.5" style="stroke:currentColor"/><path d="M92 42v9l6 4" fill="none" stroke-width="2.5" stroke-linecap="round" style="stroke:currentColor"/>',
+ off:'<path d="M26 40a48 48 0 0 1 68 0M38 52a30 30 0 0 1 44 0M50 64a12 12 0 0 1 20 0" fill="none" stroke-width="3" stroke-linecap="round" style="stroke:currentColor"/><path d="M28 74L92 14" stroke="#FF2947" stroke-width="3.5" stroke-linecap="round"/>',
+ empty:'<rect x="16" y="14" width="88" height="56" rx="12" fill="none" stroke-width="2.5" stroke-dasharray="6 5" style="stroke:currentColor" opacity=".6"/><rect x="40" y="38" width="40" height="8" rx="4" opacity=".3"/>',
+ refresh:'<path d="M84 34a28 28 0 1 0 4 20" fill="none" stroke-width="3.5" stroke-linecap="round" style="stroke:currentColor"/><path d="M88 18v18H70" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="stroke:currentColor"/>',
+ ctx:'<rect x="18" y="16" width="48" height="48" rx="12" opacity=".25"/><rect x="48" y="26" width="48" height="48" rx="12" opacity=".5"/>',
+ gen:'<rect x="16" y="18" width="88" height="10" rx="5" opacity=".3"/><rect x="16" y="38" width="88" height="10" rx="5" opacity=".2"/><rect x="16" y="58" width="56" height="10" rx="5" opacity=".2"/>'};
+const THK={principios:'idea',tiempos:'time',animacion:'anim',layout:'lay',skeleton:'sk',contenido:'ok',casos:'err2','carga-lenta':'slow','sin-conexion':'off',actualizacion:'refresh',progresivas:'steps',imagenes:'img',playground:'play',reintento:'refresh',controles:'btn',orden:'flow',checklist:'check',decisiones:'list',referentes:'refs'};
+const thumb=id=>`<div class="th"><svg width="120" height="84" viewBox="0 0 120 84" fill="#6C759F" style="color:#6C759F">${TH[THK[id]||id]||TH.gen}</svg></div>`;
+const CH=[
+ {id:'definir',n:'Definir',q:'¿Qué buscamos?',d:'Los principios que guían cada decisión de carga.',secs:['principios']},
+ {id:'esperar',n:'Esperar',q:'¿Qué ve mientras carga?',d:'Skeleton, tiempos y animación para que la espera se sienta corta y estable.',secs:['skeleton','tiempos','animacion','layout','carga-lenta']},
+ {id:'llegar',n:'Llegar',q:'¿Cómo aparece el contenido?',d:'El paso del skeleton al contenido, por módulo y por etapas.',secs:['contenido','progresivas','imagenes']},
+ {id:'fallar',n:'Fallar y recuperar',q:'¿Qué pasa si algo falla y cómo se recupera?',d:'Cada error con su ejemplo, su especificación y su reintento, para probarlos en pantalla.',secs:['casos','sin-conexion','actualizacion','controles']},
+ {id:'construir',n:'Construir',q:'¿Cómo se implementa?',d:'Orden de carga, lista de verificación, decisiones y referentes.',secs:['orden','checklist','decisiones','referentes']}];
+const CHOF=Object.fromEntries(CH.flatMap(c=>c.secs.map(x=>[x,c.id])));
+const CHK={definir:'idea',esperar:'sk',llegar:'ok',fallar:'err2',construir:'flow'};
+const secOf=id=>PG.find(p=>p.id===id);
+const pageLink=p=>`#/${CHOF[p.id]}/${p.id}`;
+const statusBar=ps=>{const c={A:0,P:0,D:0};ps.forEach(p=>p.st&&c[p.st]++);const n=c.A+c.P+c.D||1;return `<div class="sbar" title="Acordado ${c.A} · Propuesto ${c.P} · Por definir ${c.D}">${['A','P','D'].map(k=>`<i class="${ST[k][1]}" style="width:${c[k]/n*100}%"></i>`).join('')}</div>`;};
+const areaName=a=>(AREAS.find(x=>x[0]===a)||[])[1];
+
+function route(){const h=decodeURIComponent(location.hash.replace(/^#\/?/,''));const [c,x]=h.split('/');return {c:CH.some(y=>y.id===c)?c:null,s:x||null};}
+function drawChrome(c,sid){
+  $('areas').innerHTML=CH.map((x,i)=>`<a href="#/${x.id}" class="${x.id===c?'on':''}" ${x.id===c?'aria-current="step"':''}><span class="sn">${i}</span>${x.n}</a>`).join('');
+  const ch=CH.find(x=>x.id===c);
+  document.querySelector('.shell').classList.toggle('nosb',!ch);
+  $('side').innerHTML=ch?`<div class="sidecard"><h4>${CH.indexOf(ch)} · ${ch.q}</h4>`+ch.secs.map(id=>{const p=secOf(id);return `<a href="${pageLink(p)}" data-sec="${id}" class="${id===sid?'on':''}"><span class="sdot ${p.st?ST[p.st][1]:''}"></span>${p.t}</a>`}).join('')+'</div>':'';
+}
+const banner=(t,s,st,k)=>`<div class="banner">${k?`<div class="kick">${k}</div>`:''}<h1>${t}</h1><p>${s||''}</p>${st?tag(st):''}</div>`;
+function homeHTML(){
+  return banner('Guía de Skeleton views','Cómo cargamos, fallamos y reintentamos en la Super App, contado en seis capítulos.')+
+  `<div class="pnl"><div class="grid">${CH.map((x,i)=>`<a class="card" href="#/${x.id}">${thumb(CHK[x.id])}<span class="tag neutral">${i} · ${x.n}</span><h3 style="margin-top:10px">${x.q}</h3><p>${x.d}</p>${statusBar(x.secs.map(secOf))}</a>`).join('')}</div></div>`;
+}
+function chapterHTML(x){
+  const i=CH.indexOf(x),ps=x.secs.map(secOf),nx=CH[i+1];
+  return banner(x.q,x.d,null,`Capítulo ${i} · ${x.n}`)+
+  `<div class="pnl"><div class="grid">${ps.map(p=>`<a class="card" href="${pageLink(p)}">${thumb(p.id)}<h3>${p.t}</h3><p>${p.s||''}</p><div class="cf">${tag(p.st)}</div></a>`).join('')}</div></div>`+
+  ps.map(p=>`<section class="sec" id="s-${p.id}" data-id="${p.id}">${pageHTML(p)}</section>`).join('')+
+  `<a class="cta" href="${nx?'#/'+nx.id:'#/'}">${nx?'Siguiente: '+nx.q+' →':'Volver al inicio →'}</a>`;
+}
+const CASES2=[
+ {id:'mov',label:'Movimientos',type:'Error por módulo',st:'A',m:'mov',
+  pins:[['[data-m=mov]',1,'Solo falla este módulo'],['[data-m=prod]',2,'El resto sigue disponible'],['[data-retry]',3,'Reintenta solo este módulo']],
+  specs:[['220 px','Altura del módulo','El aviso ocupa lo mismo que el módulo cargado, así lo que está debajo no se mueve.'],['Solo el módulo','Alcance del reintento','Tocar el ícono recarga únicamente el servicio que falló; el resto de la pantalla sigue usable.'],['3 s*','Error por tiempo','Tiempo provisional sin respuesta para pasar a error; se ajusta con datos reales de cada servicio.'],['Inmediato','Error directo','Si el servicio responde con error, el aviso aparece sin esperar el tiempo anterior.']],
+  dec:[['A','Componente estándar de error y recarga por módulo'],['A','Diseño: ícono de actualización y mensaje, sin «Ver más»'],['D','Reintento automático y máximo de reintentos'],['D','Toast o pantalla completa según el caso'],['D','Actualizar el Figma del error por módulo a la altura del módulo (220 px)']],fig:'6972-26662',rel:['tiempos']},
+ {id:'prod',label:'Más opciones',type:'Error por módulo',st:'P',m:'prod',
+  pins:[['[data-m=prod]',1,'Solo falla este módulo'],['[data-m=mov]',2,'El resto sigue disponible'],['[data-retry]',3,'Reintenta solo este módulo']],
+  specs:[['256 px','Altura del módulo','El aviso ocupa lo mismo que la lista cargada, bajo el título «Más opciones para ti».'],['Solo el módulo','Alcance del reintento','Tocar el ícono recarga únicamente este módulo; lo demás sigue usable.'],['3 s*','Error por tiempo','Tiempo provisional, igual que en los demás módulos; por validar con datos reales.'],['Por confirmar','Diseño','Se aplica el patrón de Movimientos; falta confirmarlo para este módulo.']],
+  dec:[['P','Mismo patrón que Movimientos'],['D','Reintento automático y máximo de reintentos']],fig:'6972-26662',rel:['tiempos']},
+ {id:'breb',label:'Bre-B',type:'Error por módulo',st:'D',m:'breb',
+  pins:[['[data-m=breb]',1,'Solo falla Bre-B'],['[data-m=acts]',2,'Los accesos rápidos siguen usables'],['[data-retry]',3,'Reintenta solo Bre-B']],
+  specs:[['140 px','Altura de la tarjeta','El aviso va dentro de la tarjeta de Bre-B, que conserva su altura.'],['Solo Bre-B','Alcance del reintento','Tocar el ícono recarga únicamente el servicio de Bre-B.'],['3 s*','Error por tiempo','Tiempo provisional; por validar con datos reales.'],['Por recibir','Diseño','Falta la pantalla de error específica de Bre-B.']],
+  dec:[['D','Diseño del error de Bre-B (pendiente de recibir)']],fig:null,rel:['tiempos']},
+ {id:'crit',label:'Información del depósito',type:'Error crítico · pantalla completa',st:'P',crit:true,
+  pins:[['.cbtn',1,'Reintentar recarga toda la pantalla'],['.cmsg',2,'Mensaje de error de dos líneas'],['.nav',3,'La navegación sigue visible']],
+  specs:[['Pantalla completa','Alcance del error','Reemplaza la pantalla cuando falla un servicio sin el que no se puede armar el contenido.'],['Toda la pantalla','Qué recarga el reintento','Al tocar el ícono gira, y si responde vuelve el skeleton de toda la pantalla y luego el contenido.'],['2 líneas','Mensaje','Texto centrado de dos líneas; el del ejemplo es provisional y está por cerrar.'],['Navegación','Barra inferior','La barra de navegación sigue visible mientras el error está en pantalla.'],['Información del depósito','Servicio de ejemplo','Es el caso típico: sin ella no hay saldo ni accesos rápidos.']],
+  dec:[['A','Error general si falla el servicio de depósitos'],['P','Aplica también si falla la información del depósito'],['P','El reintento recarga toda la pantalla'],['D','Texto del mensaje']],fig:'6972-27514',rel:['sin-conexion','tiempos']}];
+function casesHTML(p){
+  return phead(p)+`<div class="seg casesel" role="group" aria-label="Caso de error">${CASES2.map((c,i)=>`<button type="button" data-ci="${i}" aria-pressed="false">${c.label}</button>`).join('')}</div><div class="chips cmeta" style="margin:0 0 4px"></div><div class="ptabs" role="tablist">${['Uso','Especificaciones','Estado y recursos'].map((t,i)=>`<button role="tab" aria-selected="${i===0}" data-tab="${i}">${t}</button>`).join('')}</div><div class="pnl tabBody"></div>`;
+}
+function mountCases(sec){
+  let ci=0,ti=0; const q=x=>sec.querySelector(x); const C=()=>CASES2[ci];
+  const cfg={fail:{},crit:false,kind:'server',retryFails:false,speed:1};
+  const MO={dash:{label:'Saldo',lat:600},carr:{label:'Aviso del carrusel',lat:500},acts:{label:'Accesos rápidos',lat:800},breb:{label:'Bre-B',lat:1000,canFail:true},mov:{label:'Movimientos',lat:1500,canFail:true},prod:{label:'Más opciones para ti',lat:2000,canFail:true}};
+  const names=Object.keys(MO),S={},T={},timers={},live=$('live');
+  let t0=performance.now(),refreshing=false,critOk=false,repinT,sc,ptr,tick,y0=null,dy=0;
+  const host=()=>q('.simHost');
+  const clearAll=()=>{Object.values(timers).forEach(clearTimeout);clearTimeout(repinT);};
+  function log(msg,warn,announce){const ul=q('.log');if(ul){const li=document.createElement('li');if(warn)li.className='warn';li.innerHTML=`<time>${((performance.now()-t0)/1000).toFixed(1)} s</time><span>${msg}</span>`;ul.appendChild(li);while(ul.children.length>40)ul.removeChild(ul.firstChild);ul.scrollTop=ul.scrollHeight;}if(announce)live.textContent=announce;}
+  function inspect(){const ul=q('.insp');if(!ul)return;const now=performance.now();ul.innerHTML=names.map(m=>{const st=S[m]||'skeleton';const txt=st==='skeleton'?`Cargando ${((now-(T[m]||now))/1000).toFixed(1)} s`:st==='loaded'?'Listo':'Error';return `<li class="${st}"><i></i><span>${MO[m].label}</span><em>${txt}</em></li>`}).join('');}
+  function unpin(){const x=sec.querySelector('.mainpv .scr');if(x)x.querySelectorAll('.pinbox').forEach(b=>b.remove());}
+  function repin(){clearTimeout(repinT);repinT=setTimeout(()=>{if(!sec.isConnected)return;unpin();addPins(sec,{pins:C().pins});},600);}
+  function setMod(m,st){S[m]=st;const h=host(),el=h&&h.querySelector(`[data-m="${m}"]`);if(!el)return;el.dataset.state=st;el.setAttribute('aria-busy',st==='skeleton'?'true':'false');el.innerHTML=modInner(m,st);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap');inspect();repin();}
+  function snack(msg){const n=q('.snack');if(!n)return;n.textContent=msg;n.classList.add('on');clearTimeout(snack.t);snack.t=setTimeout(()=>n.classList.remove('on'),3400);}
+  function schedule(m,mode){
+    const spec=MO[m],k=cfg.speed;
+    const failing=!!spec.canFail&&(mode==='cold'?!!cfg.fail[m]:(!!cfg.fail[m]&&cfg.retryFails));
+    const wait=failing&&cfg.kind==='timeout'?10000:(mode==='cold'?spec.lat:mode==='refresh'?900:1400)*k;
+    clearTimeout(timers[m]);
+    timers[m]=setTimeout(()=>{
+      if(failing){
+        if(S[m]==='loaded'){snack(`No pudimos actualizar ${ERR[m].n}`);log(`${spec.label}: no se pudo actualizar; se conservan los datos anteriores y aparece un aviso`,true,`No pudimos actualizar ${ERR[m].n}`);}
+        else{setMod(m,'error');log(`${spec.label}: ${cfg.kind==='timeout'?'sin respuesta tras 10 s':'error del servicio'}. El módulo muestra el aviso de error`,true,`No pudimos cargar ${ERR[m].n}`);}
+      }else{
+        if(S[m]!=='loaded'){setMod(m,'loaded');log(`${spec.label}: listo`,false,mode!=='cold'?`${spec.label} cargado`:'');}
+        else log(`${spec.label}: actualizado sin volver a skeleton`);
+      }
+    },wait);
+  }
+  function ensureHome(){const h=host();if(!h.querySelector('.scr:not(.crit)')){h.innerHTML=screenHTML(allS('skeleton'),{nav:false,pb:150});names.forEach(m=>S[m]='skeleton');}q('.simNav').innerHTML=navHTML();q('.simNav').style.display='';}
+  function showCrit(){host().innerHTML=critHTML('error');q('.simNav').style.display='none';q('.scroller').scrollTop=0;log(`Información del depósito: ${cfg.kind==='timeout'?'sin respuesta tras 10 s':'error del servicio'}. Se muestra el error de pantalla completa`,true,'Hubo un problema al cargar tu información');repin();}
+  function coldStart(){
+    clearAll();refreshing=false;sT=0;sV=0;rfSet(0);unpin();
+    t0=performance.now();const ul=q('.log');if(ul)ul.innerHTML='';
+    ensureHome();
+    if(cfg.crit&&!critOk){
+      names.forEach(m=>{T[m]=performance.now();setMod(m,'skeleton');});
+      log('Inicio en frío: la información del depósito está cargando',false,'Cargando información');
+      timers.crit=setTimeout(showCrit,cfg.kind==='timeout'?10000:900*cfg.speed);return;
+    }
+    log('Inicio en frío: todos los módulos de servicio en skeleton',false,'Cargando información');
+    names.forEach(m=>{T[m]=performance.now();setMod(m,'skeleton');schedule(m,'cold');});
+  }
+  function retry(m){t0=performance.now();unpin();log(`Toque en el ícono: solo ${MO[m].label} vuelve a skeleton`);T[m]=performance.now();setMod(m,'skeleton');schedule(m,'retry');const el=host().querySelector(`[data-m="${m}"]`);if(el){el.tabIndex=-1;el.focus({preventScroll:true});}}
+  function critRetry(){
+    const b=host().querySelector('[data-crit]');if(!b||b.classList.contains('ld'))return;
+    t0=performance.now();unpin();b.classList.add('ld');b.setAttribute('aria-busy','true');log('Toque en el ícono: se reintenta la pantalla completa');
+    clearTimeout(timers.crit);
+    timers.crit=setTimeout(()=>{
+      if(cfg.retryFails){b.classList.remove('ld');b.removeAttribute('aria-busy');b.classList.add('shake');setTimeout(()=>b.classList.remove('shake'),450);log('Información del depósito: el reintento también falló',true);repin();}
+      else{critOk=true;coldStart();}
+    },1400*cfg.speed);
+  }
+  function pullRefresh(){
+    if(refreshing)return;
+    if(host().querySelector('.crit')){critRetry();return;}
+    refreshing=true;t0=performance.now();log('Pull-to-refresh: todos los módulos vuelven a skeleton y se recargan');unpin();{const r=rf();if(r){rfSet(PUSH,{anim:1});r.sp.classList.add('go');spinOn();}}
+    names.forEach(m=>{const prev=S[m];if(prev==='skeleton')return;T[m]=performance.now();setMod(m,'skeleton');schedule(m,prev==='error'?'retry':'refresh');});
+    setTimeout(()=>{const r=rf();if(r){r.sp.classList.remove('go');spinOff();rfSet(0,{anim:1});}refreshing=false;repin();},1300*cfg.speed);
+  }
+  const PUSH=77,DROP=219;
+  let sA=0,sV=0,sT=0,sR=0,sL=0;
+  const calm=()=>window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rf(){const h=host(),scr=h&&h.querySelector('.scr:not(.crit)');if(!scr)return null;let sp=scr.querySelector('.rfs');if(!sp){const u=++uid;sp=document.createElement('span');sp.className='rfs';sp.innerHTML=`<svg width="44" height="44" viewBox="0 0 44 44" fill="none"><path d="M41.93 20.29C41.46 14.83 38.76 9.59 34.04 6.03C25.22 -0.62 12.68 1.14 6.03 9.96C-0.62 18.79 1.14 31.33 9.96 37.97C14.69 41.53 20.47 42.68 25.85 41.63" stroke="url(#rg${u})" stroke-width="4" stroke-linecap="round"/><defs><linearGradient id="rg${u}" x1="37.97" y1="34.04" x2="6.03" y2="9.96" gradientUnits="userSpaceOnUse"><stop offset="0.19" stop-color="#FF2947"/><stop offset="0.72" stop-color="#121E6C"/><stop offset="1" stop-color="#0407F5"/></linearGradient></defs></svg>`;scr.appendChild(sp);}return {scr,sp,body:scr.querySelector('.body')};}
+  function spinLoop(t){const r=rf();if(!r){sR=0;return;}const dt=Math.min(40,t-(sL||t));sL=t;sV+=(sT-sV)*Math.min(1,dt/140);sA+=sV*dt;r.sp.firstElementChild.style.transform=`rotate(${sA}deg)`;if(sT>0||sV>0.003)sR=requestAnimationFrame(spinLoop);else{sR=0;sL=0;}}
+  function spinOn(){sT=calm()?.12:.46;if(!sR){sL=0;sR=requestAnimationFrame(spinLoop);}}
+  function spinOff(){sT=0;if(!sR){sL=0;sR=requestAnimationFrame(spinLoop);}}
+  function rfSet(px,o){
+    const r=rf();if(!r)return;const a=o&&o.anim,pr=Math.min(1,px/PUSH),ease=calm()?'.12s linear':'.34s cubic-bezier(.2,.8,.2,1)';
+    r.body.style.transition=a?`transform ${ease}`:'none';r.body.style.transform=px?`translateY(${px}px)`:'';
+    r.sp.style.transition=a?`transform ${ease},opacity .22s ease`:'none';r.sp.style.transform=`translateY(${(pr-1)*DROP}px)`;r.sp.style.opacity=Math.min(1,pr*1.8);
+    if(!sR&&!sT){sA=px*5;r.sp.firstElementChild.style.transform=`rotate(${sA}deg)`;}
+  }
+  const gStart=y=>{y0=sc&&sc.scrollTop<=0?y:null;dy=0;};
+  const gMove=(y,ev)=>{if(y0===null||refreshing)return;dy=y-y0;if(dy>0){rfSet(Math.min(dy*.5,PUSH));if(ev&&ev.cancelable)ev.preventDefault();}};
+  const gEnd=()=>{if(y0===null)return;if(dy>80)pullRefresh();else rfSet(0,{anim:1});y0=null;dy=0;};
+  window.addEventListener('pointermove',e=>{if(e.pointerType==='mouse'&&sec.isConnected)gMove(e.clientY);});
+  window.addEventListener('pointerup',e=>{if(e.pointerType==='mouse'&&sec.isConnected)gEnd();});
+  function use(c){
+    q('.tabBody').innerHTML=`<div class="use"><div class="phone"><div class="scroller mainpv"><div class="simHost"></div></div><div class="simNav"></div><div class="snack" role="status"></div></div><div class="legend"><h3>Anatomía</h3><p class="foot" style="margin:-6px 0 12px">Toca un elemento para verlo en el prototipo.</p><ol>${c.pins.map(([,n,l])=>`<li data-n="${n}" tabindex="0"><span class="pn">${n}</span>${l}</li>`).join('')}</ol>
+      <div class="ctl"><div><h4>Acciones</h4><div class="chips" style="margin-top:0"><button class="lnk bCold" type="button">Recargar home</button><button class="lnk bPull" type="button">Pull-to-refresh</button></div></div>
+      <div><h4>Tipo de falla</h4><label class="opt"><input type="radio" name="ckind" value="server"><span>Error del servicio</span></label><label class="opt"><input type="radio" name="ckind" value="timeout"><span>Sin respuesta (10 s)</span></label></div>
+      <div><h4>Reintento y velocidad</h4><label class="opt"><input type="checkbox" class="pfail"><span>El reintento también falla</span></label><div class="row"><label class="opt"><input type="radio" name="cspeed" value="1"><span>Normal</span></label><label class="opt"><input type="radio" name="cspeed" value="2"><span>Lenta ×2</span></label><label class="opt"><input type="radio" name="cspeed" value="0.5"><span>Rápida</span></label></div><p class="hint">Los cambios se aplican en la siguiente carga.</p></div>
+      <details class="dtl"><summary>Estado y registro</summary><ul class="insp"></ul><ol class="log" aria-label="Registro de eventos"></ol></details></div></div></div>`;
+    sc=q('.scroller');
+    q('.bCold').onclick=()=>{critOk=false;coldStart();};
+    q('.bPull').onclick=pullRefresh;
+    sec.querySelectorAll('input[name=ckind]').forEach(r=>{r.checked=r.value===cfg.kind;r.onchange=()=>{cfg.kind=r.value;};});
+    sec.querySelectorAll('input[name=cspeed]').forEach(r=>{r.checked=parseFloat(r.value)===cfg.speed;r.onchange=()=>{cfg.speed=parseFloat(r.value);};});
+    q('.pfail').checked=cfg.retryFails;q('.pfail').onchange=e=>{cfg.retryFails=e.target.checked;};
+    host().addEventListener('click',e=>{const r=e.target.closest('[data-retry]'),k=e.target.closest('[data-crit]');if(r)retry(r.dataset.retry);if(k)critRetry();});
+    sc.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&!e.target.closest('button'))gStart(e.clientY);});
+    sc.addEventListener('touchstart',e=>gStart(e.touches[0].clientY),{passive:true});
+    sc.addEventListener('touchmove',e=>gMove(e.touches[0].clientY,e),{passive:false});
+    sc.addEventListener('touchend',gEnd);
+    cfg.fail={};cfg.crit=!!c.crit;if(!c.crit)cfg.fail[c.m]=true;critOk=false;
+    coldStart();
+    clearInterval(tick);tick=setInterval(()=>{if(!sec.isConnected){clearInterval(tick);clearAll();return;}inspect();},200);
+  }
+  function render(){
+    const c=C();clearAll();clearInterval(tick);
+    sec.querySelectorAll('.casesel button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===ci)));
+    sec.querySelectorAll('.ptabs button').forEach(b=>b.setAttribute('aria-selected',String(+b.dataset.tab===ti)));
+    q('.cmeta').innerHTML=`<span class="tag neutral">${c.type}</span>${tag(c.st)}`;
+    if(ti===0) use(c);
+    else if(ti===1) q('.tabBody').innerHTML=`<div class="specs">${c.specs.map(([v,l,d])=>`<div class="spec"><b>${v}</b><span>${l}</span><p>${d}</p></div>`).join('')}</div><div class="foot">* Valor del prototipo o provisional, por validar con datos reales.</div>`;
+    else q('.tabBody').innerHTML=`<h2>Decisiones</h2><div class="list" style="margin-bottom:24px">${c.dec.map(([st,x])=>`<div class="item">${tag(st)}<span>${x}</span></div>`).join('')}</div><h2>Recursos</h2><div class="links">${c.fig?`<a class="lnk" href="${FIG+c.fig}" target="_blank" rel="noopener">Frame en Figma ↗</a>`:''}${c.rel.map(r=>{const x=secOf(r);return `<a class="lnk" href="${pageLink(x)}">${x.t}</a>`}).join('')}</div>`;
+  }
+  sec.querySelectorAll('.casesel button').forEach(b=>b.onclick=()=>{ci=+b.dataset.ci;render();});
+  sec.querySelectorAll('.ptabs button').forEach(b=>b.onclick=()=>{ti=+b.dataset.tab;render();});
+  render();
+}
+function critHTML(s){
+  if(s==='loading') return screenHTML(allS('skeleton'),{pb:158.5});
+  if(s==='ok') return screenHTML(allS('loaded'),{pb:158.5});
+  return `<div class="scr crit"><div class="stat">${ICONS.status}</div><div class="cmid"><button class="cbtn" type="button" data-crit aria-label="Reintentar">${ic('update')}</button><p class="cmsg">Lo sentimos, tuvimos un problema al cargar tu información.</p></div>${navHTML('Cuentas')}</div>`;
+}
+function critRun(pv,fails){
+  const b=pv.querySelector('[data-crit]'); if(!b||b.classList.contains('ld')) return;
+  pv._t=pv._t||[]; b.classList.add('ld'); b.setAttribute('aria-busy','true');
+  pv._t.push(setTimeout(()=>{
+    if(fails()){b.classList.remove('ld');b.removeAttribute('aria-busy');b.classList.add('shake');pv._t.push(setTimeout(()=>b.classList.remove('shake'),450));}
+    else{pv.innerHTML=critHTML('loading');pv._t.push(setTimeout(()=>{pv.innerHTML=critHTML('ok')},900));}
+  },1400));
+}
+const CASES=[['mov','Movimientos','Error por módulo','A'],['prod','Más opciones','Error por módulo','P'],['breb','Bre-B','Error por módulo · diseño por recibir','D'],['crit','Información del depósito','Error crítico · pantalla completa','P']];
+function mountPlay(sec){
+  const pv=sec.querySelector('.ppv'),meta=sec.querySelector('.pmeta'); let kind='mov',timer;
+  const fails=()=>sec.querySelector('.pfail').checked;
+  const draw=()=>{clearTimeout(timer);(pv._t||[]).forEach(clearTimeout);pv._t=[];pv.scrollTop=0;pv.innerHTML=kind==='crit'?critHTML('error'):screenHTML({...allS('loaded'),[kind]:'error'},{pb:158.5});
+    const c=CASES.find(x=>x[0]===kind);meta.innerHTML=`<span class="tag neutral">${c[2]}</span>${tag(c[3])}`;
+    sec.querySelectorAll('.pcases button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===kind)));};
+  sec.querySelectorAll('.pcases button').forEach(b=>b.onclick=()=>{kind=b.dataset.k;draw();});
+  sec.querySelector('.preset').onclick=draw;
+  pv.addEventListener('click',e=>{
+    const r=e.target.closest('[data-retry]'),c=e.target.closest('[data-crit]');
+    if(r){const m=r.dataset.retry,el=pv.querySelector(`[data-m="${m}"]`);clearTimeout(timer);el.dataset.state='skeleton';el.innerHTML=modInner(m,'skeleton');timer=setTimeout(()=>{const st=fails()?'error':'loaded';el.dataset.state=st;el.innerHTML=modInner(m,st)},1400);}
+    if(c){clearTimeout(timer);critRun(pv,fails);}
+  });
+  draw();
+}
+function phead(p){return `<div class="sech"><h2>${p.t}</h2>${tag(p.st)}</div><p class="ssum">${p.s||''}</p>`;}
+function pageHTML(p){
+  if(p.k==='home') return homeHTML();
+  if(p.k==='phone') return phead(p)+(p.warn?`<div class="note"><b>!</b> ${p.warn}</div>`:'')+`<div class="ptabs" role="tablist">${['Uso','Especificaciones','Estado y recursos'].map((t,i)=>`<button role="tab" aria-selected="${i===0}" data-tab="${i}">${t}</button>`).join('')}</div><div class="pnl tabBody"></div>`;
+  if(p.k==='prog') return phead(p)+`<div class="pnl"><div class="use"><div class="phone"><div class="scroller mainpv"><div class="simHost"></div></div><div class="simNav"></div></div><div class="legend" style="min-width:340px"><h3>Orden de carga</h3><p class="foot" style="margin:-6px 0 12px">Ejemplo con el home de Banking. Los tiempos son ilustrativos.</p><div class="chips" style="margin:0 0 14px"><button class="lnk bPlay" type="button">Reproducir</button><span class="tag neutral playlab">Listo</span></div><label class="opt"><input type="checkbox" class="psaved"><span>ID del depósito guardado (omite la etapa 1)</span></label><div class="row"><label class="opt"><input type="radio" name="pspeed" value="1" checked><span>Normal</span></label><label class="opt"><input type="radio" name="pspeed" value="2"><span>Lenta ×2</span></label></div><div class="gantt"></div></div></div><div class="stages" style="margin-top:24px"></div><div class="chips"><span class="tag neutral">Cada etapa depende de la anterior</span><span class="tag neutral">En paralelo, el que responde primero se muestra primero</span><span class="tag neutral">Cada módulo conserva su altura</span><span class="tag bad">Prioridad entre saldo y movimientos: por definir</span></div><div class="foot">Fuente: sesión con desarrollo del 20 de octubre. Los tiempos son ilustrativos y las dependencias deben validarse con desarrollo. El aviso del carrusel se muestra con la información del depósito; su servicio está por confirmar.</div></div>`;
+  if(p.k==='chk') return chkHTML(p);
+  if(p.k==='cases') return casesHTML(p);
+  if(p.k==='stub') return phead(p)+`<div class="pnl"><h2>Incluirá</h2><div class="chips" style="margin-top:0">${p.c.map(c=>`<span class="tag neutral">${c}</span>`).join('')}</div><div class="stub">Ejemplo visual por agregar</div></div>`;
+  if(p.k==='prin'){const P=[
+   ['Mostrar algo de inmediato','Al abrir una pantalla la persona debe ver estructura de inmediato: nunca una pantalla en blanco ni un loader de pantalla completa. El skeleton y los títulos le anticipan qué va a encontrar mientras llegan los datos.','Al abrir el home aparecen los títulos de cada módulo con su skeleton.'],
+   ['Cada módulo carga por separado','Cada módulo depende de su propio servicio y se resuelve cuando este responde. Un módulo lento o con error no detiene a los demás, y la persona puede avanzar con lo que ya está disponible.','Si Movimientos tarda o falla, Bre-B y Más opciones para ti siguen visibles.'],
+   ['Skeleton en todos los elementos','Todo elemento que depende de datos usa skeleton, no spinners sueltos. La carga se ve igual en toda la app y cada elemento conserva su lugar. Si el servicio falla, el skeleton se reemplaza por su alternativa de error.','Un módulo nunca queda en skeleton para siempre: pasa a su estado de error.'],
+   ['Usar lo que ya está listo','Lo que no depende de datos, o que puede precargarse sin error, se puede usar mientras el resto carga. La persona no tiene que esperar a que cargue todo para hacer lo que ya puede hacer.','Transferir o Escanear QR se pueden tocar aunque Movimientos siga cargando.'],
+   ['Sin saltos de layout','El skeleton ocupa el mismo alto que el contenido final para que nada se mueva cuando llegan los datos. En pantallas pequeñas un salto desplaza justo lo que la persona iba a tocar. La excepción son los módulos que solo algunos ven: su skeleton se ajusta con una transición suave, solo durante la carga.','Al pasar Movimientos de skeleton a contenido, Más opciones para ti no cambia de posición.'],
+   ['Títulos desde el inicio','Los módulos con título propio lo muestran desde el primer instante, antes de que carguen sus datos, para dar contexto de qué se está esperando. Los elementos sin título propio, como el saldo, no lo necesitan.','Movimientos y Más opciones para ti se ven desde el inicio.'],
+   ['Probar con usuarios','Los tiempos, el umbral y el patrón de error son hipótesis hasta medirlos. Antes de cerrar, se validan con personas y con datos reales de respuesta y de carga de cada servicio.','El umbral provisional de 3 s se ajusta con esas mediciones.']];
+    return phead(p)+`<div class="pnl"><div class="grid wide">${P.map(([t,d,e],i)=>`<div class="pc"><div class="ph"><span class="pn lg">${i+1}</span><h3>${t}</h3></div><p>${d}</p><div class="ex"><b>En la práctica:</b> ${e}</div><div class="cf">${tag('A')}</div></div>`).join('')}</div></div>`;}
+  if(p.k==='time'){const C=[['Mostrar skeleton','Cuándo aparece','D'],['Carga lenta','Cuándo se considera lenta','D'],['Error por tiempo','3 s provisional','D'],['Error directo','Inmediato, sin esperar','P']];
+    return phead(p)+`<div class="pnl"><h2>Línea de tiempo de una carga</h2><div class="tl"><div class="bar"></div>
+      <div class="mk" style="left:3%"><b>0,1 s</b><span>Instantáneo</span><i></i></div>
+      <div class="mk" style="left:28%"><b>1 s</b><span>Se nota la espera</span><i></i></div>
+      <div class="mk" style="left:52%"><b>3 s</b><span>Umbral provisional</span><i></i></div>
+      <div class="mk" style="left:92%"><b>10 s</b><span>Límite de atención</span><i></i></div></div>
+      <div class="note"><b>!</b> Medir los tiempos de respuesta y de carga, y ajustar estos valores con datos reales.</div></div>
+      <div class="pnl"><h2>Cuatro tiempos por definir</h2><div class="grid">${C.map(([t,s,st])=>`<div class="card"><h3>${t}</h3><p>${s}</p><div class="cf">${tag(st)}</div></div>`).join('')}</div></div>`;}
+  if(p.k==='lay'){
+    const mph=(h,st,g,sh)=>{const bt=34+h+14;return `<div class="mp"><i class="t"></i><i class="${st}" style="top:34px;height:${h}px"></i><i class="bt" style="top:${bt}px"></i>${g!=null?`<i class="gd" style="top:${g}px"></i>`:''}${sh?`<i class="dl" style="top:${g+4}px">+${sh} px</i>`:''}</div>`;};
+    const ac=k=>`<div class="ljc"><span class="tag ${k==='yes'?'ok':'neutral'}">${k==='yes'?'El módulo aplica':'El módulo no aplica'}</span><div class="ljp"><div class="mp mpa ${k}"><i class="t"></i><i class="m"></i><i class="bt"></i><span class="lb a">Cargando</span><span class="lb b">${k==='yes'?'Cargado':'No aplica'}</span></div></div><p>${k==='yes'?'El skeleton crece hasta el tamaño del contenido y empuja suavemente lo que está debajo.':'El skeleton se contrae y lo que está debajo sube suavemente a su lugar.'}</p></div>`;
+    const pair=(a,b)=>`<div class="ljp"><div><div class="ljl">Cargando</div>${a}</div><span class="arrow">→</span><div><div class="ljl">Cargado</div>${b}</div></div>`;
+    return phead(p)+`<div class="pnl"><h2>El layout no se mueve al cargar</h2><div class="ljw">
+      <div class="ljc"><span class="tag ok">Así debe verse</span>${pair(mph(64,'sk',112),mph(64,'ct',112))}<p>El skeleton mide lo mismo que el contenido. El botón queda en el mismo lugar antes y después de cargar.</p></div>
+      <div class="ljc"><span class="tag bad">Así NO debe verse</span>${pair(mph(40,'sk'),mph(64,'ct',88,24))}<p>El contenido es más alto que el skeleton y empuja hacia abajo todo lo que sigue, incluso lo que la persona iba a tocar.</p></div></div><div class="note"><b>✓</b> Los prototipos de esta guía aplican la regla: en cada módulo, el skeleton, el contenido y el error miden lo mismo.</div></div>
+    <div class="pnl"><h2>Módulos que solo algunos ven</h2><div class="sech" style="margin:-4px 0 12px">${tag('A')}</div><p class="ssum" style="margin-top:0">Son los que no todas las personas tienen, como el aviso del carrusel o una tarjeta de crédito. Su skeleton se transforma al tamaño real del contenido, y si el módulo no aplica, se contrae.</p><div class="ljw" style="margin-top:18px">${ac('yes')}${ac('no')}</div><div class="chips"><span class="tag neutral">Solo durante la carga</span><span class="tag neutral">~300 ms*</span><span class="tag neutral">Desplaza suavemente lo de abajo</span><span class="tag neutral">Sin cambios una vez cargado</span></div><div class="foot">* Valor del prototipo, por validar.</div></div>`;}
+  if(p.k==='anim'){
+    const sw=c=>`<i class="sw" style="background:${c}"></i>`;
+    const V=[
+     ['Barrido','d-sweep',[['Duración del ciclo','1,5 s'],['Dirección','De izquierda a derecha, en horizontal'],['Colores',`${sw('#F3F4FB')}Gris base <code>#F3F4FB</code><br>${sw('#FBFBFE')}Gris de brillo <code>#FBFBFE</code>`],['Easing','Lineal (linear), sin pausa entre ciclos']]],
+     ['Pulso','d-pulse',[['Duración del ciclo','1,4 s'],['Dirección','No aplica: la opacidad baja y sube (100 % → 55 % → 100 %)'],['Colores',`${sw('#F3F4FB')}Gris base <code>#F3F4FB</code><br>Sin gris de brillo: cambia la opacidad`],['Easing','Suave al inicio y al final (ease-in-out)']]]];
+    return phead(p)+`<div class="pnl"><h2>Dos versiones existentes</h2><div class="demo">${V.map(([t,c,rows])=>`<div class="dm wide"><h3>${t}</h3><div class="dbar ${c}" style="width:60%"></div><div class="dbar ${c}"></div><div class="dbar ${c}" style="width:80%"></div><div class="anr">${rows.map(([k,v])=>`<div class="ar"><span>${k}</span><div>${v}</div></div>`).join('')}</div><div class="cf">${tag('D')}</div></div>`).join('')}</div><div class="chips"><span class="tag neutral">Con «Reducir movimiento»: gris base estático</span></div><div class="foot">Valores del prototipo, por validar. La animación que se elija aplica a toda la app.</div></div>`;}
+  if(p.k==='btn') return phead(p)+`<div class="pnl"><h2>Botón con loader</h2><div class="demo"><div class="dm"><h3>Toca el botón</h3><button class="bbtn bdemo" type="button">Pagar</button><div class="chips"><span class="tag neutral">Se bloquea al cargar</span></div></div><div class="dm"><h3>Scroll infinito</h3><div class="dbar"></div><div class="dbar"></div><div class="dbar" style="width:70%"></div><div style="text-align:center" class="dots"><i style="background:#6C759F"></i><i style="background:#6C759F"></i><i style="background:#6C759F"></i></div><div class="chips"><span class="tag neutral">Loader pequeño al final</span></div></div></div></div>`;
+  if(p.k==='play') return phead(p)+`<div class="pnl"><div class="use"><div class="pv ppv" style="height:852px"></div><div class="legend"><h3>Qué falla</h3><div class="seg pcases">${CASES.map(c=>`<button type="button" data-k="${c[0]}" aria-pressed="false">${c[1]}</button>`).join('')}</div><div class="chips pmeta" style="margin:0 0 18px"></div><label class="opt"><input type="checkbox" class="pfail"><span>El reintento también falla</span></label><div class="chips"><button class="lnk preset" type="button">Reiniciar</button></div><div class="note"><b>!</b> Toca «Reintentar» dentro del teléfono.</div></div></div></div>`;
+  if(p.k==='order') return phead(p)+`<div class="ptabs" role="tablist">${FLOWS.map((f,i)=>`<button role="tab" aria-selected="${i===0}" data-tab="${i}">${f[0]}</button>`).join('')}</div><div class="pnl tabBody"></div><div class="foot">Fuente: reunión del 20 de octubre con desarrollo. Los datos marcados como propuestos o por definir deben validarse.</div>`;
+  if(p.k==='dec') return phead(p)+`<div class="pnl"><div class="list">${DEC.map(([s,t,o])=>`<div class="item">${tag(s)}<span>${t}</span><small>${o}</small></div>`).join('')}</div></div>`;
+  if(p.k==='refs') return phead(p)+`<div class="pnl"><div class="grid">${REFS.map(([t,u,s])=>`<a class="card" href="${u}" target="_blank" rel="noopener"><h3>${t}</h3><p>${s}</p></a>`).join('')}</div></div>`;
+  if(p.k==='sim') return phead(p)+`<div class="pnl simSlot"></div>`;
+  return phead(p);
+}
+function tabHTML(p,i){
+  if(i===0) return `<div class="use"><div class="pv mainpv"${p.ph.html?' style="height:852px"':''}>${p.ph.html?p.ph.html():screenHTML(p.ph.states,{pb:p.ph.pb})}</div><div class="legend"><h3>Anatomía</h3><p class="foot" style="margin:-6px 0 12px">Toca un elemento para verlo en el prototipo.</p><ol>${p.pins.map(([,n,l])=>`<li data-n="${n}" tabindex="0"><span class="pn">${n}</span>${l}</li>`).join('')}</ol>${p.play?'<div class="chips"><button class="lnk bPlay" type="button">Ver la carga normal</button><span class="tag neutral playlab">Listo</span></div>':''}${p.ph.html?'<div class="chips"><button class="lnk critReset" type="button">Reiniciar demo</button></div><div class="note"><b>!</b> Toca el ícono para reintentar.</div>':''}</div></div>`;
+  if(i===1) return `<div class="specs">${p.specs.map(([v,l,d])=>`<div class="spec"><b>${v}</b><span>${l}</span><p>${d}</p></div>`).join('')}</div><div class="foot">* Valor del prototipo o provisional, por validar con datos reales.</div>`;
+  return `<h2>Decisiones</h2><div class="list" style="margin-bottom:24px">${p.dec.map(([s,t])=>`<div class="item">${tag(s)}<span>${t}</span></div>`).join('')}</div><h2>Recursos</h2><div class="links"><a class="lnk" href="${FIG+p.fig}" target="_blank" rel="noopener">Frame en Figma ↗</a><a class="lnk" href="#/fallar/casos">Prototipo interactivo</a>${p.rel.map(r=>{const q=PG.find(x=>x.id===r);return `<a class="lnk" href="${pageLink(q)}">${q.t}</a>`}).join('')}</div>`;
+}
+function addPins(sec,p){
+  const scr=sec.querySelector('.mainpv .scr'); if(!scr) return;
+  const sb=scr.getBoundingClientRect();
+  p.pins.forEach(([sel,n])=>scr.querySelectorAll(sel).forEach(el=>{const r=el.getBoundingClientRect(); const d=document.createElement('span'); d.className='pinbox'; d.dataset.n=n;
+    Object.assign(d.style,{top:(r.top-sb.top-4)+'px',left:(r.left-sb.left-4)+'px',width:(r.width+8)+'px',height:(r.height+8)+'px'}); scr.appendChild(d);}));
+  const pv=sec.querySelector('.mainpv');
+  sec.querySelectorAll('.legend li[data-n]').forEach(li=>{
+    const set=on=>scr.querySelectorAll(`.pinbox[data-n="${li.dataset.n}"]`).forEach(x=>x.classList.toggle('hl',on));
+    const go=()=>{
+      const pin=p.pins.find(x=>String(x[1])===li.dataset.n), el=pin&&scr.querySelector(pin[0]); if(!el||!pv) return;
+      const top=el.getBoundingClientRect().top-scr.getBoundingClientRect().top;
+      const to=Math.max(0,top-(pv.clientHeight-el.offsetHeight)/2);
+      const calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(pv.scrollTo) pv.scrollTo({top:to,behavior:calm?'auto':'smooth'}); else pv.scrollTop=to;
+      set(true); clearTimeout(li._h); li._h=setTimeout(()=>set(false),1500);
+    };
+    li.onmouseenter=li.onfocus=()=>set(true); li.onmouseleave=li.onblur=()=>set(false);
+    li.onclick=go; li.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+  });
+}
+function autoWhenVisible(sec,fn){
+  const t=sec.querySelector('.mainpv')||sec;
+  if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){o.disconnect();fn();}},{threshold:.35});o.observe(t);}else fn();
+}
+function playLoad(sec,p){
+  const scr=sec.querySelector('.mainpv .scr'); if(!scr) return;
+  (scr._t||[]).forEach(clearTimeout); scr._t=[];
+  scr.querySelectorAll('.pinbox').forEach(x=>x.remove());
+  const L={dash:600,carr:500,acts:800,breb:1000,mov:1500,prod:2000};
+  const set=(m,st)=>{const el=scr.querySelector(`[data-m="${m}"]`);if(!el)return;el.dataset.state=st;el.innerHTML=modInner(m,st);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap');};
+  const lab=sec.querySelector('.playlab'); if(lab) lab.textContent='Cargando…';
+  const pv=sec.querySelector('.mainpv'); if(pv&&pv.scrollTo) pv.scrollTo({top:0,behavior:'auto'});
+  Object.keys(L).forEach(m=>set(m,'skeleton'));
+  Object.entries(L).forEach(([m,ms])=>scr._t.push(setTimeout(()=>set(m,'loaded'),ms)));
+  scr._t.push(setTimeout(()=>{if(lab)lab.textContent='Listo';if(sec.isConnected)addPins(sec,p);},2300));
+}
+const SVC=[
+ {id:'free',stage:0,label:'Más opciones para ti',s:0,e:300,mods:['prod'],feeds:['Más opciones para ti'],fail:'No aplica: no depende de un servicio',use:'Desde el primer momento',st:'P'},
+ {id:'list',stage:1,label:'Lista de depósitos',s:0,e:900,mods:[],feeds:['Depósito por defecto'],fail:'Error crítico a pantalla completa con reintento',use:'Nada todavía: sin el ID no hay datos del depósito',st:'A'},
+ {id:'info',stage:2,label:'Información del depósito',s:900,e:1700,mods:['dash','acts','carr'],feeds:['Saldo','Accesos rápidos'],fail:'Error crítico a pantalla completa con reintento',use:'Los accesos rápidos, apenas llegan',st:'P'},
+ {id:'breb',stage:2,label:'Bre-B',s:900,e:2100,mods:['breb'],feeds:['Bre-B'],fail:'Por definir (diseño por recibir)',use:'Sus accesos, cuando carga',st:'D'},
+ {id:'mov',stage:2,label:'Movimientos',s:900,e:2600,mods:['mov'],feeds:['Movimientos'],fail:'Error en el módulo con «Reintentar»',use:'No bloquea las transferencias',st:'P'}];
+function mountProg(sec){
+  const q=x=>sec.querySelector(x); let timers=[],raf=0;
+  const speed=()=>parseFloat(sec.querySelector('input[name=pspeed]:checked').value);
+  const sched=()=>{const saved=q('.psaved').checked;return SVC.map(x=>{let a=x.s,b=x.e;if(saved&&x.stage>0){if(x.id==='list'){a=0;b=0;}else{a=Math.max(0,a-900);b=Math.max(0,b-900);}}return {...x,s:a,e:b,skip:saved&&x.id==='list'};});};
+  const GR=[[1,'Etapa 1'],[2,'Etapa 2 · en paralelo'],[0,'Sin servicio']];
+  function draw(sc,D){
+    q('.gantt').innerHTML=`<div class="gpw"><i class="gp"></i></div>`+GR.map(([n,t])=>`<div class="gsg">${t}</div>`+sc.filter(x=>x.stage===n).map(x=>`<div class="gr"><span>${x.label}${x.skip?' (omitida)':''}</span><div class="tr"><i class="gb pend" data-sv="${x.id}" style="left:${x.s/D*100}%;width:${Math.max(0,(x.e-x.s))/D*100}%"></i></div></div>`).join('')).join('')+`<div class="gh"><span>0 s</span><span>tiempo (ilustrativo)</span></div>`;
+    q('.stages').innerHTML=sc.map(x=>`<div class="svc"><div class="ph" style="display:flex;gap:8px;align-items:center"><i class="sdot2 pend" data-sv="${x.id}"></i><h3>${x.label}</h3></div><div class="chips" style="margin-top:8px">${x.feeds.map(f=>`<span class="tag neutral">${f}</span>`).join('')}</div><p class="fl"><b>Si falla:</b> ${x.fail}</p><p class="fl"><b>Se puede usar:</b> ${x.use}</p><div class="cf">${tag(x.st)}</div></div>`).join('');
+  }
+  const mark=(id,st)=>sec.querySelectorAll(`[data-sv="${id}"]`).forEach(el=>{el.classList.remove('pend','run','done');el.classList.add(st);});
+  function play(){
+    timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf);
+    const sc=sched(),f=speed(),D=Math.max(1,...sc.map(x=>x.e));
+    draw(sc,D);
+    const host=q('.simHost');host.innerHTML=screenHTML(allS('skeleton'),{nav:false,pb:150});q('.simNav').innerHTML=navHTML();
+    const lab=q('.playlab');lab.textContent='Cargando…';
+    const set=(m,st)=>{const el=host.querySelector(`[data-m="${m}"]`);if(!el)return;el.dataset.state=st;el.innerHTML=modInner(m,st);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap');};
+    sc.forEach(x=>{
+      timers.push(setTimeout(()=>mark(x.id,'run'),x.s*f));
+      timers.push(setTimeout(()=>{mark(x.id,'done');x.mods.forEach(m=>set(m,'loaded'));},x.e*f));
+    });
+    timers.push(setTimeout(()=>{lab.textContent='Listo';},D*f+100));
+    const t0=performance.now();
+    const step=()=>{if(!sec.isConnected)return;const pr=Math.min(1,(performance.now()-t0)/(D*f));const g=q('.gp');if(g)g.style.left=(pr*100)+'%';if(pr<1)raf=requestAnimationFrame(step);};
+    raf=requestAnimationFrame(step);
+  }
+  q('.bPlay').onclick=play; q('.psaved').onchange=play;
+  sec.querySelectorAll('input[name=pspeed]').forEach(r=>r.onchange=play);
+  play();
+}
+function showTab(sec,p,i){
+  sec.querySelectorAll('.ptabs button').forEach(b=>b.setAttribute('aria-selected',String(+b.dataset.tab===i)));
+  sec.querySelector('.tabBody').innerHTML=tabHTML(p,i); if(i===0) addPins(sec,p);
+  if(i===0&&p.play){sec.querySelector('.bPlay').onclick=()=>playLoad(sec,p);if(!sec._auto){sec._auto=1;autoWhenVisible(sec,()=>playLoad(sec,p));}}
+  if(i===0&&p.ph.html){const pv=sec.querySelector('.mainpv');pv.onclick=e=>{if(e.target.closest('[data-crit]'))critRun(pv,()=>false)};sec.querySelector('.critReset').onclick=()=>{(pv._t||[]).forEach(clearTimeout);pv._t=[];pv.innerHTML=p.ph.html();addPins(sec,p);};}
+}
+const holder=document.getElementById('holder');
+function mountSec(sec,p){
+  if(p.k==='phone'){showTab(sec,p,0);sec.querySelectorAll('.ptabs button').forEach(b=>b.onclick=()=>showTab(sec,p,+b.dataset.tab));}
+  if(p.k==='sim') sec.querySelector('.simSlot').appendChild(holder.querySelector('.lab'));
+  if(p.k==='cases') mountCases(sec);
+  if(p.k==='chk'){const bx=[...sec.querySelectorAll('.ck input')],u=()=>{const n=bx.filter(b=>b.checked).length;sec.querySelector('.ckcount').textContent=`${n} de ${bx.length} completados`;sec.querySelector('.pfill').style.width=(n/bx.length*100)+'%';};bx.forEach(b=>b.onchange=u);u();}
+  if(p.k==='prog') mountProg(sec);
+  if(p.k==='order'){const so=i=>{sec.querySelectorAll('.ptabs button').forEach(b=>b.setAttribute('aria-selected',String(+b.dataset.tab===i)));sec.querySelector('.tabBody').innerHTML=flowHTML(FLOWS[i][1])};so(0);sec.querySelectorAll('.ptabs button').forEach(b=>b.onclick=()=>so(+b.dataset.tab));}
+  if(p.k==='btn'){const b=sec.querySelector('.bdemo');b.onclick=()=>{if(b.getAttribute('aria-busy')==='true')return;b.setAttribute('aria-busy','true');b.innerHTML='<span class="dots"><i></i><i></i><i></i></span>';setTimeout(()=>{b.removeAttribute('aria-busy');b.textContent='Pagar'},2000)}}
+}
+let io,cur='__';
+function spy(){
+  if(io) io.disconnect(); if(!('IntersectionObserver' in window)) return;
+  io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting) document.querySelectorAll('#side [data-sec]').forEach(a=>a.classList.toggle('on',a.dataset.sec===e.target.dataset.id));}),{rootMargin:'-20% 0px -70% 0px'});
+  document.querySelectorAll('.sec').forEach(x=>io.observe(x));
+}
+function render(){
+  const {c,s}=route(); const ch=CH.find(x=>x.id===c);
+  if(c!==cur){
+    const lab=document.querySelector('.lab'); if(lab&&lab.parentElement!==holder) holder.appendChild(lab);
+    cur=c; drawChrome(c,s);
+    $('main').innerHTML=ch?chapterHTML(ch):homeHTML();
+    if(ch) ch.secs.forEach(id=>mountSec(document.getElementById('s-'+id),secOf(id)));
+    spy();
+  } else drawChrome(c,s);
+  const t=s&&document.getElementById('s-'+s);
+  if(t&&t.scrollIntoView) t.scrollIntoView(); else window.scrollTo(0,0);
+  document.title=(ch?ch.q:'Guía de Skeleton views')+' | Guía de Skeleton views';
+}
+window.addEventListener('hashchange',render);
+render();
+
+</script>
+</body>
+</html>
